@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="shop">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BagXtra — Your Item Is Already Boarding</title>
+<meta name="description" content="Send items internationally with verified travelers already flying your route. BagXtra is live — match, escrow-protect your money, and deliver borderless.">
+<link rel="icon" href="https://www.usebagxtra.com/_next/image?url=%2Fbagxtralogo.png&w=3840&q=75">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Montserrat:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome 6 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+<style>
+
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --plum:#58285A;
+  --plum-soft:#9C6B9F;
+  --rose:#E7185E;
+  --rose-bright:#FF2D72;
+  --ink:#150B19;
+  --gold:#C7972E;
+  --gold-soft:#E4C589;
+
+  --radius-s:10px;
+  --radius-m:18px;
+  --radius-l:28px;
+
+  --sp-1:.5rem; --sp-2:1rem; --sp-3:1.6rem; --sp-4:2.6rem; --sp-5:4.2rem; --sp-6:6.4rem;
+  --sp-7: clamp(4rem, 3rem + 5vw, 9rem);
+
+  --fs-eyebrow: .76rem;
+  --fs-body: clamp(1rem, .96rem + .2vw, 1.08rem);
+  --fs-h1: clamp(2.5rem, 1.7rem + 3.6vw, 4.7rem);
+  --fs-h2: clamp(1.9rem, 1.5rem + 1.8vw, 3.1rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + .6vw, 1.6rem);
+  --fs-stat: clamp(2rem, 1.5rem + 2vw, 3.1rem);
+
+  --ease: cubic-bezier(.16,1,.3,1);
+  --container: 1240px;
+
+  --font-display:'Fraunces', serif;
+  --font-body:'Montserrat', sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+  --font-hand:'Caveat', cursive;
+}
+
+html[data-mode="shop"]{
+  --bg:#FBF5F2; --bg-deep:#F4E7EA; --surface:#FFFFFF; --surface-2:#F6ECEE;
+  --text:#1C0F1F; --text-muted:#73606F;
+  --line: rgba(28,15,31,.13); --line-strong: rgba(28,15,31,.22);
+  --accent: var(--rose); --accent-strong:#C9124E; --on-accent:#FFFFFF;
+  --notch-bg: var(--bg); --shadow: 0 30px 60px -30px rgba(88,40,90,.35);
+  --board-bg:#1C1322; --board-text:#F6F0F4;
+}
+html[data-mode="travel"]{
+  --bg:#100A14; --bg-deep:#0A060D; --surface:#1C1322; --surface-2:#241A2C;
+  --text:#F6F0F4; --text-muted:#B5A4BB;
+  --line: rgba(255,255,255,.12); --line-strong: rgba(255,255,255,.22);
+  --accent: var(--rose-bright); --accent-strong:#FF6C9A; --on-accent:#1C0F1F;
+  --notch-bg: var(--bg); --shadow: 0 30px 70px -25px rgba(0,0,0,.6);
+  --board-bg:#000000; --board-text:#F6F0F4;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:var(--font-body); font-size:var(--fs-body); line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  transition:background .55s var(--ease), color .55s var(--ease);
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+.container{max-width:var(--container); margin-inline:auto; padding-inline:clamp(1.25rem,4vw,3rem);}
+h1,h2,h3{font-family:var(--font-display); margin:0; font-weight:600; letter-spacing:-.01em;}
+p{margin:0;}
+button{font-family:inherit;}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.skip-link{position:absolute;left:1rem;top:-3rem;background:var(--accent);color:var(--on-accent);padding:.7rem 1.1rem;border-radius:8px;z-index:999;transition:top .25s var(--ease);text-decoration:none;font-weight:700;}
+.skip-link:focus{top:1rem;}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+}
+
+/* ============================================================
+   SHARED UI ATOMS
+   ============================================================ */
+.eyebrow{ font-family:var(--font-mono); font-size:var(--fs-eyebrow); letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+.eyebrow-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:.55em;vertical-align:middle;box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);}
+
+.btn-bx{
+  display:inline-flex;align-items:center;gap:.55em;
+  font-family:var(--font-body); font-weight:700; font-size:.98rem;
+  padding:.95em 1.6em; border-radius:999px; border:1px solid transparent;
+  cursor:pointer; text-decoration:none; white-space:nowrap;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease);
+}
+.btn-bx-primary{ background:var(--accent); color:var(--on-accent); box-shadow:0 14px 30px -12px color-mix(in srgb, var(--accent) 70%, transparent);}
+.btn-bx-primary:hover{ transform:translateY(-2px); box-shadow:0 18px 38px -12px color-mix(in srgb, var(--accent) 80%, transparent); color:var(--on-accent);}
+.btn-bx-ghost{ background:transparent; color:var(--text); border-color:var(--line-strong);}
+.btn-bx-ghost:hover{ border-color:var(--accent); color:var(--accent); transform:translateY(-2px);}
+.btn-arrow{ transition:transform .3s var(--ease); display:inline-block;}
+.btn-bx:hover .btn-arrow{ transform:translateX(3px); }
+
+.section{ padding-block:var(--sp-7); border-top:1px solid var(--line); }
+.section-head{ max-width:640px; margin-bottom:var(--sp-5); }
+.section-head h2{ margin-top:.6em; }
+.section-head p{ margin-top:1em; color:var(--text-muted); font-size:1.08rem; }
+.section-head.center{ margin-inline:auto; text-align:center; }
+
+/* perforated "boarding pass" treatment — the signature device */
+.ticket{ position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-m); box-shadow:var(--shadow); }
+.ticket-notch{ position:absolute; width:22px; height:22px; border-radius:50%; background:var(--notch-bg); border:1px solid var(--line); top:50%; transform:translateY(-50%); z-index:2; }
+.ticket-notch.left{ left:-11px; } .ticket-notch.right{ right:-11px; }
+.ticket-divider{ border:none; border-top:2px dashed var(--line-strong); margin:0; }
+.barcode{ height:26px; margin-top:.9rem; background-image:repeating-linear-gradient(90deg, var(--text) 0 2px, transparent 2px 4px, var(--text) 4px 5px, transparent 5px 9px, var(--text) 9px 12px, transparent 12px 14px); opacity:.55; border-radius:2px; }
+
+/* rotated "stamp" — verified / human touch */
+.stamp{
+  display:inline-flex; align-items:center; gap:.4em;
+  font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; font-weight:700;
+  color:var(--gold); border:2px solid var(--gold); border-radius:999px; padding:.35em .8em .35em .6em;
+  transform:rotate(-6deg); position:relative;
+}
+
+/* handwritten "human note" accents */
+.handnote{ font-family:var(--font-hand); font-size:1.4rem; line-height:1.1; color:var(--accent); }
+.washi{ position:absolute; width:64px; height:22px; background:color-mix(in srgb, var(--gold-soft) 70%, transparent); opacity:.85; transform:rotate(-7deg); top:-12px; left:24px; box-shadow:0 2px 6px rgba(0,0,0,.12); }
+.washi.right{ left:auto; right:24px; transform:rotate(7deg); }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.site-nav{ position:sticky; top:0; z-index:100; background:color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line); transition:background .55s var(--ease), border-color .55s var(--ease); }
+.site-nav .container{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:.85rem; }
+.site-nav__brand{ display:flex; align-items:center; gap:.6rem; text-decoration:none; min-width:0; }
+.site-nav__brand img{ height:28px; width:auto; }
+.site-nav__wordmark{ font-family:var(--font-display); font-weight:700; font-size:1.18rem; letter-spacing:-.01em; color:var(--text); white-space:nowrap; }
+.site-nav__links{ display:flex; align-items:center; gap:clamp(1rem,2vw,1.9rem); list-style:none; margin:0; padding:0; }
+.site-nav__links a{ text-decoration:none; font-weight:600; font-size:.94rem; color:var(--text-muted); white-space:nowrap; padding:.3rem 0; position:relative; transition:color .3s var(--ease); }
+.site-nav__links a::after{ content:""; position:absolute; left:0; right:100%; bottom:-3px; height:2px; background:var(--accent); transition:right .3s var(--ease); }
+.site-nav__links a:hover{ color:var(--text); }
+.site-nav__links a:hover::after{ right:0; }
+.site-nav__actions{ display:flex; align-items:center; gap:.9rem; flex-shrink:0; }
+.nav-toggle{ display:none; background:none; border:1px solid var(--line-strong); border-radius:10px; width:42px; height:38px; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; color:var(--text); font-size:1.1rem;}
+
+@media (max-width: 880px){
+  .site-nav__links{ position:fixed; inset:64px 0 auto 0; flex-direction:column; align-items:flex-start; background:var(--bg); border-bottom:1px solid var(--line); padding:1.4rem clamp(1.25rem,4vw,3rem) 2rem; gap:1.1rem; transform:translateY(-12px); opacity:0; pointer-events:none; transition:transform .35s var(--ease), opacity .35s var(--ease); }
+  .site-nav__links.is-open{ transform:translateY(0); opacity:1; pointer-events:auto; }
+  .site-nav__links a{ font-size:1.05rem; }
+  .nav-toggle{ display:inline-flex; }
+  .site-nav__cta-text{ display:none; }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{ padding-block: clamp(2.6rem,4vw,4.5rem) var(--sp-6); position:relative; overflow:hidden;}
+.hero > .container{ position:relative; z-index:1; }
+.hero__bg{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+.hero__floaters{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+.hero__floater{ position:absolute; border-radius:50%; overflow:hidden; box-shadow:0 16px 30px -10px rgba(0,0,0,.4); border:3px solid var(--surface); animation:hffloat 7s ease-in-out infinite; opacity:.92; }
+.hero__floater img{ width:100%; height:100%; object-fit:cover; display:block; }
+@keyframes hffloat{ 0%,100%{ transform:translateY(0) rotate(var(--rot,0deg)); } 50%{ transform:translateY(-16px) rotate(var(--rot,0deg)); } }
+@media (prefers-reduced-motion: reduce){ .hero__floater{ animation:none; } }
+@media (max-width:980px){ .hero__floaters{ display:none; } }
+.hero__floaters-mobile{ display:none; gap:.6rem; flex-wrap:wrap; margin-top:1.6rem; }
+.hero__floaters-mobile span{ width:38px; height:38px; border-radius:50%; overflow:hidden; border:2px solid var(--surface); box-shadow:0 6px 14px -6px rgba(0,0,0,.35); flex-shrink:0; }
+.hero__floaters-mobile img{ width:100%; height:100%; object-fit:cover; display:block; }
+@media (max-width:980px){ .hero__floaters-mobile{ display:flex; } }
+.hero__bg img{ position:absolute; inset:0; width:100%; height:145%; object-fit:cover; opacity:.22; -webkit-mask-image:linear-gradient(to bottom, black 0%, transparent 78%); mask-image:linear-gradient(to bottom, black 0%, transparent 78%); }
+.hero__bg::after{ content:""; position:absolute; inset:0; background:
+  radial-gradient(620px circle at 88% 6%, color-mix(in srgb, var(--rose) 38%, transparent), transparent 62%),
+  radial-gradient(560px circle at 4% 68%, color-mix(in srgb, var(--plum) 36%, transparent), transparent 58%); }
+.hero__blob{ position:absolute; border-radius:50%; filter:blur(70px); opacity:.48; z-index:0; }
+.hero__blob.a{ width:320px; height:320px; background:var(--rose-bright); top:-70px; right:4%; animation:bxfloat 11s ease-in-out infinite; }
+.hero__blob.b{ width:260px; height:260px; background:var(--plum); bottom:-50px; left:2%; animation:bxfloat 13s ease-in-out infinite reverse; }
+@keyframes bxfloat{ 0%,100%{ transform:translateY(0) scale(1);} 50%{ transform:translateY(-24px) scale(1.06);} }
+@media (prefers-reduced-motion: reduce){ .hero__blob{ animation:none !important; } }
+.hero__top{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.2rem; margin-bottom: clamp(2rem,4vw,3.2rem); }
+.status-pill{ display:inline-flex; align-items:center; gap:.5rem; border:1px solid var(--line-strong); border-radius:999px; padding:.5rem 1rem; font-family:var(--font-mono); font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; }
+.status-pill b{ color:var(--accent); font-weight:700; }
+.status-pill .blink{ animation:blink 1.4s steps(1) infinite; }
+@keyframes blink{ 50%{ opacity:.15; } }
+
+.mode-toggle{ display:inline-flex; border:1px solid var(--line-strong); border-radius:999px; padding:4px; gap:4px; background:var(--surface-2); position:relative;}
+.mode-btn{ border:none; background:transparent; cursor:pointer; padding:.6rem 1.15rem; border-radius:999px; font-family:var(--font-mono); font-size:.78rem; letter-spacing:.07em; font-weight:600; text-transform:uppercase; color:var(--text-muted); transition:color .3s var(--ease), background .3s var(--ease); }
+.mode-btn[aria-selected="true"]{ background:var(--accent); color:var(--on-accent); }
+
+.hero__grid{ display:grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem,4vw,4rem); align-items:start; }
+.hero__copy h1{ font-size:var(--fs-h1); line-height:1.0; letter-spacing:-.02em; }
+.hero__copy .eyebrow{ display:block; margin-bottom:1rem; }
+.hero__copy p.lede{ margin-top:1.4rem; font-size:1.15rem; color:var(--text-muted); max-width:46ch; }
+.hero__actions{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:2.1rem; }
+.hero__proof{ display:flex; align-items:center; gap:.7rem; margin-top:2.2rem; font-family:var(--font-mono); font-size:.82rem; color:var(--text-muted); }
+.hero__proof .stars{ color:var(--accent); letter-spacing:.1em; }
+.hero__mini-features{ display:flex; flex-wrap:wrap; gap:1.5rem 2.4rem; margin-top:2.2rem; padding-top:1.8rem; border-top:1px dashed var(--line-strong); }
+.hero__mini-feature{ display:flex; align-items:center; gap:.65rem; font-size:.88rem; color:var(--text-muted); font-weight:600; }
+.hero__mini-feature .mf-icon{ width:34px; height:34px; border-radius:50%; background:var(--surface-2); display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:.92rem; flex-shrink:0; }
+
+/* split-flap word cycler */
+.flap-word{ display:inline-block; position:relative; color:var(--accent); }
+.flap-word .flap-inner{ display:inline-block; transition:transform .15s; }
+.flap-word.is-flipping .flap-inner{ animation:flapcycle .38s var(--ease); }
+@keyframes flapcycle{ 0%{ transform:translateY(0) scaleY(1); opacity:1;} 45%{ transform:translateY(-6%) scaleY(.3); opacity:.35;} 55%{ transform:translateY(6%) scaleY(.3); opacity:.35;} 100%{ transform:translateY(0) scaleY(1); opacity:1;} }
+
+.hero__visual{ position:relative; }
+.hero__photo-card{ position:relative; border-radius:var(--radius-l); overflow:hidden; box-shadow:var(--shadow); aspect-ratio:5/4; margin-bottom:-86px; isolation:isolate; }
+.hero__photo-card img{ width:100%; height:100%; object-fit:cover; filter:saturate(1.2) contrast(1.06); }
+.hero__photo-card::after{ content:""; position:absolute; inset:0; background:linear-gradient(150deg, color-mix(in srgb, var(--plum) 60%, transparent) 0%, color-mix(in srgb, var(--rose) 30%, transparent) 65%, transparent 100%); mix-blend-mode:multiply; }
+.hero__float-badge{ position:absolute; display:inline-flex; align-items:center; gap:.5em; background:rgba(255,255,255,.95); color:var(--ink); font-family:var(--font-mono); font-size:.72rem; font-weight:700; letter-spacing:.03em; padding:.55em .95em; border-radius:999px; box-shadow:0 14px 28px -10px rgba(0,0,0,.4); z-index:2; animation:bxbob 6s ease-in-out infinite; white-space:nowrap; max-width:calc(100% - 1.6rem); }
+.hero__float-badge i{ color:var(--accent); flex-shrink:0; }
+.hero__float-badge.a{ top:6%; left:5%; }
+.hero__float-badge.b{ bottom:6%; right:5%; animation-delay:-3s; }
+@keyframes bxbob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-9px); } }
+@media (prefers-reduced-motion: reduce){ .hero__float-badge{ animation:none; } }
+@media (max-width:560px){ .hero__float-badge{ font-size:.62rem; padding:.5em .8em; } }
+
+.calc-card{ position:relative; z-index:1; padding:clamp(1.6rem,3vw,2.2rem); width:100%; }
+.calc-card__head{ display:flex; align-items:center; justify-content:space-between; padding-bottom:1.1rem; border-bottom:1px dashed var(--line-strong); margin-bottom:1.3rem; }
+.calc-card__head span{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); }
+.calc-card__head strong{ font-family:var(--font-mono); font-size:.78rem; letter-spacing:.1em; color:var(--accent); }
+.calc-row{ display:grid; grid-template-columns:1fr 1fr; gap:.9rem; margin-bottom:.9rem; }
+.calc-field{ display:flex; flex-direction:column; gap:.4rem; }
+.calc-field label{ font-family:var(--font-mono); font-size:.68rem; letter-spacing:.09em; text-transform:uppercase; color:var(--text-muted); }
+.calc-field select, .calc-field input[type="number"]{ font-family:var(--font-body); font-weight:600; font-size:.95rem; color:var(--text); background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:.7rem .8rem; appearance:none; -webkit-appearance:none; cursor:pointer; background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%); background-position: calc(100% - 18px) center, calc(100% - 13px) center; background-size:5px 5px; background-repeat:no-repeat; }
+.calc-field input[type="range"]{ accent-color:var(--accent); width:100%; }
+.calc-field input[type="number"]{ cursor:text; background-image:none; }
+.range-value{ font-family:var(--font-mono); font-size:.85rem; color:var(--accent); font-weight:700; }
+.calc-divider{ margin:1.1rem 0; }
+.calc-output{ display:grid; grid-template-columns:1fr 1fr; gap:.8rem 1rem; align-items:end; }
+.calc-output .num{ font-family:var(--font-mono); font-size:clamp(1.4rem, 1rem + 2.2vw, 2.15rem); font-weight:700; color:var(--accent); line-height:1; }
+.calc-output .num small{ font-size:.5em; color:var(--text-muted); font-weight:600; display:block; margin-bottom:.35em; }
+.calc-badge{ grid-column:1/-1; justify-self:end; background:color-mix(in srgb, var(--accent) 16%, transparent); color:var(--accent); font-family:var(--font-mono); font-size:.74rem; font-weight:700; padding:.4rem .7rem; border-radius:999px; }
+.calc-fine{ margin-top:1rem; font-size:.76rem; color:var(--text-muted); }
+
+@media (max-width: 980px){
+  .hero__grid{ grid-template-columns:1fr; }
+  .hero__photo-card{ margin-bottom:-50px; aspect-ratio:16/9; }
+  .calc-row{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:560px){
+  .calc-row{ grid-template-columns:1fr; }
+  .hero__top{ flex-direction:column; align-items:flex-start; }
+  .hero__photo-card{ margin-bottom:-30px; }
+  .calc-card{ width:100%; transform:none; }
+}
+
+/* ============================================================
+   STORE STRIP
+   ============================================================ */
+.store-strip{ border-top:1px solid var(--line); }
+.store-row{ display:flex; flex-wrap:wrap; gap:.9rem; justify-content:center; }
+.store-chip{ display:inline-flex; align-items:center; gap:.6rem; background:var(--surface); border:1px solid var(--line); padding:.7rem 1.3rem; border-radius:999px; font-family:var(--font-mono); font-size:.85rem; font-weight:600; letter-spacing:.02em; color:var(--text); transition:transform .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);}
+.store-chip i{ color:var(--accent); font-size:1rem; }
+.store-chip:hover{ transform:translateY(-3px); border-color:var(--accent); color:var(--accent); }
+
+/* ============================================================
+   STATS STRIP (count-up, "alive" data)
+   ============================================================ */
+.stats-strip{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding-block:var(--sp-4); }
+.stats-strip .row > div{ text-align:center; padding-block:.6rem; }
+.stat-num{ font-family:var(--font-mono); font-weight:700; font-size:var(--fs-stat); color:var(--accent); line-height:1; }
+.stat-label{ margin-top:.5rem; color:var(--text-muted); font-size:.85rem; }
+
+/* ============================================================
+   PERSONA PANELS
+   ============================================================ */
+.persona-panel[data-persona="travel"]{ display:none; }
+html[data-mode="travel"] .persona-panel[data-persona="shop"]{ display:none; }
+html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
+
+.compare-card{ padding:0 0 1.4rem; display:flex; flex-direction:column; gap:1rem; height:100%; transition:transform .35s var(--ease), box-shadow .35s var(--ease); overflow:hidden;}
+.compare-card:hover{ transform:translateY(-5px); }
+.compare-card__photo{ aspect-ratio:4/3; overflow:hidden; background:var(--surface-2); }
+.compare-card__photo img{ width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease); }
+.compare-card:hover .compare-card__photo img{ transform:scale(1.06); }
+.compare-card__body{ padding:0 1.6rem; display:flex; flex-direction:column; gap:1rem; }
+.compare-card__top{ display:flex; align-items:center; justify-content:space-between; gap:.6rem; }
+.compare-card__icon{ width:42px; height:42px; border-radius:12px; background:var(--surface-2); display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:1.05rem; flex-shrink:0; }
+.compare-card h3{ font-size:1.18rem; }
+
+/* sliding carousel */
+.evidence-carousel-wrap{ position:relative; }
+.evidence-carousel{ display:flex; gap:1.4rem; overflow-x:auto; padding:.4rem .4rem 1.3rem; margin:0 -.4rem; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:var(--line-strong) transparent; }
+.evidence-carousel::-webkit-scrollbar{ height:7px; }
+.evidence-carousel::-webkit-scrollbar-track{ background:transparent; }
+.evidence-carousel::-webkit-scrollbar-thumb{ background:var(--line-strong); border-radius:99px; }
+.evidence-card{ flex:0 0 clamp(225px, 25vw, 270px); }
+.carousel-arrow{ position:absolute; top:36%; transform:translateY(-50%); width:42px; height:42px; border-radius:50%; background:var(--surface); border:1px solid var(--line-strong); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text); z-index:3; box-shadow:var(--shadow); transition:background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease); }
+.carousel-arrow:hover{ background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+.carousel-arrow.prev{ left:-16px; }
+.carousel-arrow.next{ right:-16px; }
+@media (max-width:760px){ .carousel-arrow{ display:none; } }
+.price-row{ display:flex; align-items:baseline; justify-content:space-between; font-family:var(--font-mono); font-size:.9rem; padding:.5rem 0; border-bottom:1px dashed var(--line); color:var(--text-muted); }
+.price-row strong{ color:var(--text); font-weight:700; }
+.price-row.win strong{ color:var(--accent); }
+.save-badge{ align-self:flex-start; background:color-mix(in srgb, var(--accent) 15%, transparent); color:var(--accent); font-family:var(--font-mono); font-weight:700; font-size:.78rem; padding:.35rem .7rem; border-radius:999px; }
+.evidence-fine{ margin-top:1.4rem; font-size:.8rem; color:var(--text-muted); text-align:center; }
+
+/* departures board — routes-as-flight-board signature */
+.board{ background:var(--board-bg); border-radius:var(--radius-m); overflow:hidden; box-shadow:var(--shadow); }
+.board__head{ display:flex; align-items:center; justify-content:space-between; padding:1rem 1.4rem; border-bottom:1px solid rgba(255,255,255,.12); }
+.board__head span{ font-family:var(--font-mono); color:var(--board-text); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; opacity:.7; }
+.board__head .dot-live{ width:8px; height:8px; border-radius:50%; background:#3FE08A; display:inline-block; margin-right:.5em; box-shadow:0 0 0 4px rgba(63,224,138,.25); animation:pulse 1.8s infinite; }
+@keyframes pulse{ 50%{ opacity:.4; } }
+.board__row{ display:grid; grid-template-columns: 1.4fr 2.2fr 1.4fr 1.3fr; gap:1rem; align-items:center; padding:.85rem 1.4rem; font-family:var(--font-mono); color:var(--board-text); border-bottom:1px solid rgba(255,255,255,.07); font-size:.92rem; }
+.board__row:last-child{ border-bottom:none; }
+.board__row .route-code{ font-weight:700; letter-spacing:.04em; display:flex; align-items:center; gap:.5rem;}
+.board__row .route-code i{ color:var(--accent); font-size:.78rem; }
+.board__row .cities{ opacity:.75; font-family:var(--font-body); font-size:.85rem; }
+.board__status{ font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; padding:.3rem .6rem; border-radius:999px; text-align:center; font-weight:700; }
+.board__status--high{ background:color-mix(in srgb, var(--accent-strong, var(--rose)) 25%, transparent); color:#FF8FAE; }
+.board__status--mid{ background:rgba(255,255,255,.1); color:rgba(255,255,255,.65); }
+.board__fine{ font-family:var(--font-mono); font-size:.75rem; color:rgba(255,255,255,.45); padding:.9rem 1.4rem; text-align:center; }
+@media (max-width:700px){ .board__row{ grid-template-columns:1fr 1fr; row-gap:.3rem;} .board__row .cities{ grid-column:1/-1; order:3;} }
+
+/* ============================================================
+   HOW IT WORKS
+   ============================================================ */
+.steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; }
+.step{ position:relative; padding-top:1rem; }
+.step__num{ font-family:var(--font-mono); font-size:.78rem; color:var(--accent); letter-spacing:.1em; }
+.step h3{ font-size:1.3rem; margin-top:.6rem; }
+.step p{ margin-top:.7rem; color:var(--text-muted); }
+.step__bar{ height:3px; background:var(--line); border-radius:2px; margin-bottom:1rem; position:relative; overflow:hidden; }
+.step__bar::after{ content:""; position:absolute; inset:0; width:33%; background:var(--accent); border-radius:2px; }
+.step:nth-child(2) .step__bar::after{ width:66%; }
+.step:nth-child(3) .step__bar::after{ width:100%; }
+@media (max-width:880px){ .steps{ grid-template-columns:1fr; gap:2.2rem; } }
+
+/* ============================================================
+   ESCROW / FLIGHT-PATH TRUST SECTION
+   ============================================================ */
+.escrow-cols{ display:grid; grid-template-columns:1fr 1fr; gap:2.4rem; }
+.escrow-col{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-m); padding:clamp(1.6rem,3vw,2.2rem); position:relative; }
+.escrow-col h3{ font-size:1.2rem; display:flex; align-items:center; gap:.6rem; }
+.escrow-col h3 i{ color:var(--accent); font-size:1.1rem; flex-shrink:0; }
+.flight-path{ display:flex; align-items:center; margin:1.6rem 0 1.2rem; position:relative; }
+.flight-path .dot{ width:11px; height:11px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.flight-path .dot:last-child{ background:var(--text); opacity:.25; }
+.flight-path .line{ flex:1; height:2px; background:repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 12px); position:relative; margin:0 -1px; }
+.flight-path .plane{ position:absolute; left:38%; top:50%; transform:translate(-50%,-50%); color:var(--accent); font-size:1rem; animation:fly 3.2s ease-in-out infinite; }
+@keyframes fly{ 0%,100%{ left:8%; } 50%{ left:88%; } }
+.escrow-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.9rem; }
+.escrow-list li{ display:flex; gap:.8rem; font-size:.95rem; color:var(--text-muted); }
+.escrow-list li b{ color:var(--text); font-family:var(--font-mono); font-size:.78rem; flex-shrink:0; width:1.6em; }
+.escrow-col .stamp{ position:absolute; top:1.4rem; right:1.4rem; }
+@media (max-width:880px){ .escrow-cols{ grid-template-columns:1fr; } .escrow-col .stamp{ display:none; } }
+
+/* ============================================================
+   ATMOSPHERIC REST BEAT
+   ============================================================ */
+.rest-beat{ position:relative; padding-block:0; border-top:1px solid var(--line); overflow:hidden;}
+.rest-beat__inner{ position:relative; min-height:clamp(320px,42vw,460px); display:flex; align-items:center; }
+.rest-beat img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.rest-beat::after{ content:""; position:absolute; inset:0; background:linear-gradient(100deg, rgba(10,6,13,.82) 0%, rgba(10,6,13,.55) 45%, rgba(10,6,13,.15) 75%, transparent 95%); }
+.rest-beat__text{ position:relative; z-index:1; max-width:560px; padding:clamp(2.4rem,6vw,0) clamp(1.25rem,4vw,3rem); margin-inline:auto; width:100%; }
+.rest-beat__text .eyebrow{ color:#fff; opacity:.9; }
+.rest-beat__text h2{ color:#fff; font-size:var(--fs-h2); margin-top:.7rem; line-height:1.08; text-shadow:0 4px 24px rgba(0,0,0,.35); }
+.rest-beat__text p{ color:rgba(255,255,255,.85); margin-top:1rem; font-size:1.05rem; }
+
+/* ============================================================
+   VENDOR NETWORK
+   ============================================================ */
+.vendor-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2.6rem; align-items:center; }
+.vendor-points{ list-style:none; margin:1.6rem 0 0; padding:0; display:flex; flex-direction:column; gap:1.3rem; }
+.vendor-points li{ display:flex; gap:1rem; }
+.vendor-points .vicon{ width:2.2em; height:2.2em; border-radius:50%; background:var(--surface-2); color:var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.95rem; }
+.vendor-points span{ color:var(--text-muted); }
+.vendor-points strong{ display:block; color:var(--text); font-family:var(--font-body); font-weight:700; margin-bottom:.2rem; }
+.vendor-photo{ border-radius:var(--radius-l); overflow:hidden; box-shadow:var(--shadow); aspect-ratio:4/5; position:relative; }
+.vendor-photo img{ width:100%; height:100%; object-fit:cover; }
+@media (max-width:880px){ .vendor-grid{ grid-template-columns:1fr; } .vendor-photo{ order:-1; aspect-ratio:16/9; } }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testi-card{ padding:1.7rem; display:flex; flex-direction:column; gap:1.1rem; height:100%; position:relative; }
+.testi-card p{ font-family:var(--font-display); font-size:1.12rem; font-style:italic; line-height:1.45; }
+.testi-who{ display:flex; align-items:center; gap:.8rem; }
+.avatar{ width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:700; color:#fff; flex-shrink:0; }
+.testi-who div span{ display:block; font-size:.8rem; color:var(--text-muted); }
+.testi-who div strong{ font-weight:700; font-family:var(--font-hand); font-size:1.25rem; }
+.testi-card .route-tag{ font-family:var(--font-mono); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
+
+/* ============================================================
+   FOUNDERS
+   ============================================================ */
+.founders-wrap{ display:grid; grid-template-columns:1.1fr .9fr; gap:3rem; align-items:start; }
+.founders-wrap p{ color:var(--text-muted); font-size:1.08rem; max-width:56ch; }
+.founders-wrap p + p{ margin-top:1.1rem; }
+.founder-list{ display:flex; flex-direction:column; gap:1.1rem; }
+.founder{ display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-m); padding:.9rem 1.1rem; }
+.founder-photo{ width:58px; height:58px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--surface); box-shadow:0 0 0 2px var(--line-strong); }
+.founder-photo img{ width:100%; height:100%; object-fit:cover; }
+.founder div strong{ display:block; }
+.founder div span{ color:var(--text-muted); font-size:.86rem; }
+@media (max-width:880px){ .founders-wrap{ grid-template-columns:1fr; } }
+
+/* ============================================================
+   FAQ (Bootstrap accordion, restyled)
+   ============================================================ */
+.faq-list .accordion-item{ background:transparent; border:none; border-bottom:1px solid var(--line); border-radius:0 !important; }
+.faq-list .accordion-button{ background:transparent; color:var(--text); font-family:var(--font-body); font-weight:700; font-size:1.05rem; padding:1.4rem 0; box-shadow:none !important; }
+.faq-list .accordion-button:not(.collapsed){ color:var(--accent); }
+.faq-list .accordion-button::after{ filter:none; }
+.faq-list .accordion-button .num{ font-family:var(--font-mono); color:var(--accent); font-size:.82rem; margin-right:.8rem; font-weight:600; }
+.faq-list .accordion-body{ padding:0 0 1.5rem 2.3rem; color:var(--text-muted); max-width:62ch; }
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final-cta{ position:relative; border-top:1px solid var(--line); padding-block:var(--sp-7); overflow:hidden; color:#fff; }
+.final-cta img.bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+.final-cta::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(16,8,18,.78), rgba(16,8,18,.92)); z-index:0; }
+.final-cta .container{ position:relative; z-index:1; text-align:center; max-width:760px; }
+.final-cta .eyebrow{ color:#fff; opacity:.8; }
+.final-cta h2{ color:#fff; font-size:var(--fs-h2); margin-top:.8rem; line-height:1.06; }
+.final-cta p{ color:rgba(255,255,255,.78); margin-top:1.2rem; font-size:1.1rem; }
+.final-cta__actions{ display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-top:2.2rem; }
+.final-cta .btn-bx-ghost{ color:#fff; border-color:rgba(255,255,255,.35); }
+.final-cta .btn-bx-ghost:hover{ border-color:#fff; color:#fff; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer{ border-top:1px solid var(--line); padding-block:var(--sp-6) var(--sp-4); }
+.footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:2.4rem; }
+.footer-brand img{ height:26px; margin-bottom:1rem; }
+.footer-brand p{ color:var(--text-muted); max-width:30ch; font-size:.92rem; }
+.footer-col h4{ font-family:var(--font-mono); font-size:.74rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-muted); margin-bottom:1rem; }
+.footer-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.7rem; }
+.footer-col a{ text-decoration:none; color:var(--text); font-size:.92rem; font-weight:600; }
+.footer-col a:hover{ color:var(--accent); }
+.footer-social{ display:flex; gap:.7rem; margin-top:1.2rem; }
+.footer-social a{ width:36px; height:36px; border-radius:50%; border:1px solid var(--line-strong); display:flex; align-items:center; justify-content:center; color:var(--text); transition:all .3s var(--ease); }
+.footer-social a:hover{ background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+.footer-bottom{ margin-top:var(--sp-5); padding-top:1.6rem; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; font-size:.82rem; color:var(--text-muted); font-family:var(--font-mono); }
+@media (max-width:880px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:560px){ .footer-grid{ grid-template-columns:1fr; } }
+
+/* ============================================================
+   REVEAL ANIMATION
+   ============================================================ */
+.reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.is-visible{ opacity:1; transform:translateY(0); }
+.reveal-stagger.is-visible > *{ animation:none; }
+
+/* ============================================================
+   SMALL-SCREEN REFINEMENTS (sub-440px phones, fine-tuning)
+   ============================================================ */
+@media (max-width:440px){
+  :root{ --sp-7: clamp(3rem, 2.4rem + 6vw, 5rem); }
+  .mode-toggle{ width:100%; }
+  .mode-btn{ flex:1; padding:.6rem .5rem; font-size:.7rem; text-align:center; }
+  .hero__actions{ flex-direction:column; align-items:stretch; }
+  .hero__actions .btn-bx{ width:100%; justify-content:center; }
+  .final-cta__actions{ flex-direction:column; align-items:stretch; }
+  .final-cta__actions .btn-bx{ width:100%; justify-content:center; }
+  .hero__mini-features{ flex-direction:column; gap:1rem; }
+  .faq-list .accordion-body{ padding-left:1rem; }
+  .faq-list .accordion-button{ font-size:.98rem; gap:.4rem; }
+  .faq-list .accordion-button .num{ margin-right:.4rem; }
+  .store-row{ gap:.6rem; }
+  .store-chip{ font-size:.74rem; padding:.55em 1em; }
+  .founder{ padding:.8rem; gap:.8rem; }
+  .testi-card{ padding:1.3rem; }
+  .compare-card__body{ padding:0 1.2rem; }
+  .vendor-points li{ gap:.8rem; }
+  .calc-row{ gap:.7rem; }
+  .board__row{ padding:.75rem 1rem; font-size:.82rem; }
+  .board__head{ padding:.85rem 1rem; }
+}
+
+/* prevent any accidental horizontal scroll on very narrow viewports */
+@media (max-width:380px){
+  .hero__copy h1{ font-size: clamp(2.1rem, 1.6rem + 5vw, 2.8rem); }
+  :root{ --fs-h2: clamp(1.6rem, 1.3rem + 3vw, 2.4rem); }
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <div class="container">
+    <a class="site-nav__brand" href="#top" aria-label="BagXtra home">
+      <img src="https://www.usebagxtra.com/_next/image?url=%2Fbagxtralogo.png&amp;w=3840&amp;q=75" alt="">
+      <span class="site-nav__wordmark">BagXtra</span>
+    </a>
+    <nav>
+      <ul class="site-nav__links" id="navLinks">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#evidence" data-set-mode="shop">For Shoppers</a></li>
+        <li><a href="#evidence" data-set-mode="travel">For Travelers</a></li>
+        <li><a href="#vendors">For Vendors</a></li>
+        <li><a href="https://blog.usebagxtra.com/" target="_blank" rel="noopener">Blog</a></li>
+      </ul>
+    </nav>
+    <div class="site-nav__actions">
+      <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/" target="_blank" rel="noopener">
+        <span class="site-nav__cta-text">Get Started</span><span aria-hidden="true" class="btn-arrow">→</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero" id="top">
+    <div class="hero__bg" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="" loading="lazy">
+      <span class="hero__blob a"></span>
+      <span class="hero__blob b"></span>
+    </div>
+    <div class="hero__floaters" aria-hidden="true">
+      <span class="hero__floater" style="width:56px;height:56px;top:5%;left:1%;--rot:-9deg;animation-delay:0s;"><img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+      <span class="hero__floater" style="width:44px;height:44px;top:22%;left:3%;--rot:7deg;animation-delay:-2s;"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+      <span class="hero__floater" style="width:60px;height:60px;top:40%;left:1%;--rot:-6deg;animation-delay:-4s;"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+      <span class="hero__floater" style="width:46px;height:46px;top:58%;left:3%;--rot:8deg;animation-delay:-1.2s;"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+      <span class="hero__floater" style="width:50px;height:50px;top:78%;left:1%;--rot:-7deg;animation-delay:-3.4s;"><img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+      <span class="hero__floater" style="width:48px;height:48px;top:12%;right:2%;--rot:10deg;animation-delay:-1.5s;"><img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+      <span class="hero__floater" style="width:44px;height:44px;top:30%;right:1%;--rot:-8deg;animation-delay:-2.8s;"><img src="https://images.unsplash.com/photo-1551816230-ef5deaed4a26?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+      <span class="hero__floater" style="width:52px;height:52px;top:50%;right:3%;--rot:6deg;animation-delay:-5s;"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+      <span class="hero__floater" style="width:46px;height:46px;top:68%;right:1%;--rot:-9deg;animation-delay:-0.8s;"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+      <span class="hero__floater" style="width:50px;height:50px;top:86%;right:2%;--rot:8deg;animation-delay:-3.8s;"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+      <span class="hero__floater" style="width:48px;height:48px;top:88%;left:2%;--rot:-10deg;animation-delay:-4.6s;"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+      <span class="hero__floater" style="width:44px;height:44px;top:5%;right:4%;--rot:9deg;animation-delay:-2.2s;"><img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&amp;w=120&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+    </div>
+    <div class="container">
+      <div class="hero__top" style="justify-content:flex-end;">
+        <div class="mode-toggle" role="tablist" aria-label="Choose your path">
+          <button class="mode-btn" type="button" data-mode-btn="shop" role="tab" aria-selected="true">I'm shopping</button>
+          <button class="mode-btn" type="button" data-mode-btn="travel" role="tab" aria-selected="false">I'm traveling</button>
+        </div>
+      </div>
+
+      <div class="hero__grid">
+        <div class="hero__copy">
+
+          <div class="persona-panel" data-persona="shop">
+            <span class="eyebrow">For shoppers</span>
+            <h1>Your <span class="flap-word" id="flapWord" aria-live="polite"><span class="flap-inner">iPhone</span></span> is already in someone's carry&#8209;on.</h1>
+            <p class="lede">Buy from any store abroad and get it brought to you by a verified traveler already booked on your route — for a fraction of what courier shipping costs.</p>
+            <div class="hero__actions">
+              <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=shopper" target="_blank" rel="noopener">Find a traveler <span class="btn-arrow" aria-hidden="true">→</span></a>
+              <a class="btn-bx btn-bx-ghost" href="#how-it-works">See how it works</a>
+            </div>
+          </div>
+
+          <div class="persona-panel" data-persona="travel">
+            <span class="eyebrow">For travelers</span>
+            <h1>Turn your carry&#8209;on into a paycheck.</h1>
+            <p class="lede">List your upcoming flight, carry a few verified store-bought items, and get paid the moment you hand them off — guaranteed before you ever board.</p>
+            <div class="hero__actions">
+              <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=traveler" target="_blank" rel="noopener">List your trip <span class="btn-arrow" aria-hidden="true">→</span></a>
+              <a class="btn-bx btn-bx-ghost" href="#how-it-works">See how it works</a>
+            </div>
+          </div>
+
+          <div class="hero__mini-features">
+            <span class="hero__mini-feature"><span class="mf-icon" aria-hidden="true"><i class="fa-solid fa-id-badge"></i></span>Verified travelers, every trip</span>
+            <span class="hero__mini-feature"><span class="mf-icon" aria-hidden="true"><i class="fa-solid fa-vault"></i></span>Funds held in escrow</span>
+            <span class="hero__mini-feature"><span class="mf-icon" aria-hidden="true"><i class="fa-solid fa-store"></i></span>Vendor pickup hubs near you</span>
+          </div>
+
+          <div class="hero__floaters-mobile" aria-hidden="true">
+            <span><img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+            <span><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+            <span><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+            <span><img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+            <span><img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+            <span><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+            <span><img src="https://images.unsplash.com/photo-1551816230-ef5deaed4a26?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+            <span><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+            <span><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+            <span><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+            <span><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+            <span><img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&amp;w=100&amp;auto=format&amp;fit=crop" alt="" loading="lazy"></span>
+          </div>
+        </div>
+
+        <div class="hero__visual">
+          <div class="hero__photo-card">
+            <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Travelers walking through an airport terminal with their luggage" loading="lazy">
+            <span class="hero__float-badge a"><i class="fa-solid fa-shield-check"></i> Escrow protected</span>
+            <span class="hero__float-badge b"><i class="fa-solid fa-plane-departure"></i> JFK → LOS · boarding</span>
+          </div>
+
+          <!-- SHOP calculator -->
+          <div class="ticket calc-card persona-panel" data-persona="shop">
+            <span class="ticket-notch left" aria-hidden="true"></span>
+            <span class="ticket-notch right" aria-hidden="true"></span>
+            <div class="calc-card__head">
+              <span>Item ticket — estimate</span>
+              <strong>BAGXTRA</strong>
+            </div>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="shopOrigin">Buying from</label>
+                <select id="shopOrigin">
+                  <option value="1.0">United States</option>
+                  <option value="1.05">United Kingdom</option>
+                  <option value="0.95">United Arab Emirates</option>
+                  <option value="1.0">Canada</option>
+                </select>
+              </div>
+              <div class="calc-field">
+                <label for="shopDest">Delivered to</label>
+                <select id="shopDest">
+                  <option>Lagos</option>
+                  <option>Abuja</option>
+                  <option>Port Harcourt</option>
+                </select>
+              </div>
+            </div>
+            <div class="calc-field" style="margin-bottom:1.1rem;">
+              <label for="shopValue">Item value (USD)</label>
+              <input type="number" id="shopValue" min="20" max="3000" step="10" value="300">
+            </div>
+            <hr class="ticket-divider calc-divider">
+            <div class="calc-output">
+              <div class="num"><small>Courier estimate</small><span id="shopCourier">$195</span></div>
+              <div class="num"><small>BagXtra estimate</small><span id="shopBagx" style="color:var(--accent)">$70</span></div>
+              <span class="calc-badge" id="shopSave">Save 64%</span>
+            </div>
+            <div class="barcode" aria-hidden="true"></div>
+            <p class="calc-fine">Illustrative example, not a quote — your traveler sets the final fee in-app.</p>
+          </div>
+
+          <!-- TRAVEL calculator -->
+          <div class="ticket calc-card persona-panel" data-persona="travel">
+            <span class="ticket-notch left" aria-hidden="true"></span>
+            <span class="ticket-notch right" aria-hidden="true"></span>
+            <div class="calc-card__head">
+              <span>Boarding ticket — estimate</span>
+              <strong>BAGXTRA</strong>
+            </div>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="travelFrom">From</label>
+                <select id="travelFrom">
+                  <option>JFK</option><option>LHR</option><option>YYZ</option><option>ATL</option>
+                </select>
+              </div>
+              <div class="calc-field">
+                <label for="travelTo">To</label>
+                <select id="travelTo">
+                  <option>LOS</option><option>ACC</option><option>NBO</option>
+                </select>
+              </div>
+            </div>
+            <div class="calc-field" style="margin-bottom:.4rem;">
+              <label for="travelSpace">Spare luggage space <span class="range-value" id="travelSpaceVal">3kg</span></label>
+              <input type="range" id="travelSpace" min="1" max="10" step="1" value="3">
+            </div>
+            <hr class="ticket-divider calc-divider">
+            <div class="calc-output">
+              <div class="num"><small>Estimated payout</small><span id="travelPayout">$45–$75</span></div>
+              <span class="calc-badge">Guaranteed at hand-off</span>
+            </div>
+            <div class="barcode" aria-hidden="true"></div>
+            <p class="calc-fine">Illustrative example, not a quote — your payout locks in when you accept a request.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ STATS STRIP ============================ -->
+  <section class="stats-strip reveal">
+    <div class="container">
+      <div class="row gy-3">
+        <div class="col-6 col-md-3">
+          <div class="stat-num" data-count="3" data-suffix="">3</div>
+          <div class="stat-label">cities with a working pilot — Lagos, Toronto, Accra</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-num" data-count="64" data-suffix="%">0%</div>
+          <div class="stat-label">typical savings vs. courier shipping</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-num" data-count="2" data-suffix=" min">0 min</div>
+          <div class="stat-label">average time to post a request</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-num" data-count="100" data-suffix="%">0%</div>
+          <div class="stat-label">of funds held in escrow until handoff</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ STORE STRIP ============================ -->
+  <section class="section store-strip reveal" style="padding-block:var(--sp-6);">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Shop from</span>
+        <h2>Any US store. One traveler away.</h2>
+        <p>If it ships within the United States, there's a good chance someone's already flying it your way.</p>
+      </div>
+      <div class="store-row">
+        <span class="store-chip"><i class="fa-brands fa-amazon"></i>Amazon</span>
+        <span class="store-chip"><i class="fa-brands fa-apple"></i>Apple Store</span>
+        <span class="store-chip"><i class="fa-solid fa-store"></i>Walmart</span>
+        <span class="store-chip"><i class="fa-solid fa-bullseye"></i>Target</span>
+        <span class="store-chip"><i class="fa-solid fa-tv"></i>Best Buy</span>
+        <span class="store-chip"><i class="fa-solid fa-shoe-prints"></i>Nike</span>
+        <span class="store-chip"><i class="fa-solid fa-spray-can-sparkles"></i>Sephora</span>
+        <span class="store-chip"><i class="fa-brands fa-ebay"></i>eBay</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ EVIDENCE: comparisons / routes ============================ -->
+  <section class="section reveal" id="evidence">
+    <div class="container">
+
+      <div class="persona-panel" data-persona="shop">
+        <div class="section-head">
+          <span class="eyebrow">Same item, real savings</span>
+          <h2>Half the price. One traveler away.</h2>
+          <p>A look at what shoppers are typically saving when a traveler carries the item instead of a courier.</p>
+        </div>
+        <div class="evidence-carousel-wrap">
+          <button class="carousel-arrow prev" type="button" data-dir="-1" aria-label="Scroll to previous items"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="evidence-carousel" id="evidenceCarousel">
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="iPhone 16 smartphone" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>iPhone 16, 128GB</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$799</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$1,250</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$880</strong></div>
+                  <span class="save-badge">Save ~30%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="MacBook Air laptop" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>MacBook Air M3</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-laptop"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$999</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$1,650</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$1,120</strong></div>
+                  <span class="save-badge">Save ~32%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="PlayStation 5 console and controller" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>PlayStation 5</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-gamepad"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$499</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$850</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$580</strong></div>
+                  <span class="save-badge">Save ~32%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Mirrorless camera" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>Mirrorless camera</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-camera-retro"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$650</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$1,050</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$740</strong></div>
+                  <span class="save-badge">Save ~30%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Luxury designer handbag" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>Designer handbag</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-bag-shopping"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$320</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$620</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$410</strong></div>
+                  <span class="save-badge">Save ~34%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Women's clothing rack" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>Designer dress</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-shirt"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$90</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$175</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$120</strong></div>
+                  <span class="save-badge">Save ~31%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Premium hair bundle" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>Premium hair bundle</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-scissors"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$140</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$280</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$185</strong></div>
+                  <span class="save-badge">Save ~34%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Pair of sneakers" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>Designer sneakers</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-shoe-prints"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$180</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$340</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$225</strong></div>
+                  <span class="save-badge">Save ~34%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1551816230-ef5deaed4a26?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Smartwatch on a wrist" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>Apple Watch SE</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-stopwatch"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$249</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$420</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$295</strong></div>
+                  <span class="save-badge">Save ~30%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Designer perfume bottle" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>Designer perfume</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-spray-can-sparkles"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$85</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$160</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$110</strong></div>
+                  <span class="save-badge">Save ~31%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Wireless headphones" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>Wireless headphones</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-headphones"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$179</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$310</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$215</strong></div>
+                  <span class="save-badge">Save ~31%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-card">
+              <div class="ticket compare-card">
+                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Gold jewelry set" loading="lazy"></div>
+                <div class="compare-card__body">
+                  <div class="compare-card__top">
+                    <h3>Gold jewelry set</h3>
+                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-gem"></i></div>
+                  </div>
+                  <div class="price-row"><span>US store price</span><strong>$220</strong></div>
+                  <div class="price-row"><span>Typical local retail</span><strong>$420</strong></div>
+                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$280</strong></div>
+                  <span class="save-badge">Save ~33%</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <button class="carousel-arrow next" type="button" data-dir="1" aria-label="Scroll to more items"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <p class="evidence-fine">Prices are illustrative examples — actual pricing is set by each traveler when you connect in the app.</p>
+      </div>
+
+      <div class="persona-panel" data-persona="travel">
+        <div class="section-head">
+          <span class="eyebrow">Where shoppers need a hand</span>
+          <h2>Routes shoppers keep requesting.</h2>
+          <p>If you're already booked on one of these routes, there's a good chance a request is waiting for you. Live look at today's board:</p>
+        </div>
+        <div class="board">
+          <div class="board__head">
+            <span><span class="dot-live" aria-hidden="true"></span>Departures — request board</span>
+            <span id="boardClock">--:--</span>
+          </div>
+          <div class="board__row">
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>JFK → LOS</span>
+            <span class="cities">New York → Lagos</span>
+            <span class="cities">3 requests open</span>
+            <span class="board__status board__status--high">High demand</span>
+          </div>
+          <div class="board__row">
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>LHR → LOS</span>
+            <span class="cities">London → Lagos</span>
+            <span class="cities">5 requests open</span>
+            <span class="board__status board__status--high">High demand</span>
+          </div>
+          <div class="board__row">
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>ATL → ACC</span>
+            <span class="cities">Atlanta → Accra</span>
+            <span class="cities">2 requests open</span>
+            <span class="board__status board__status--mid">Growing demand</span>
+          </div>
+          <div class="board__row">
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>IAH → NBO</span>
+            <span class="cities">Houston → Nairobi</span>
+            <span class="cities">1 request open</span>
+            <span class="board__status board__status--mid">Growing demand</span>
+          </div>
+          <div class="board__row">
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>YYZ → MNL</span>
+            <span class="cities">Toronto → Manila</span>
+            <span class="cities">2 requests open</span>
+            <span class="board__status board__status--mid">Growing demand</span>
+          </div>
+          <div class="board__row">
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>DFW → CGK</span>
+            <span class="cities">Dallas → Jakarta</span>
+            <span class="cities">1 request open</span>
+            <span class="board__status board__status--mid">Growing demand</span>
+          </div>
+          <div class="board__fine">Don't see your route? Post your trip anyway — new requests come in daily.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================ HOW IT WORKS ============================ -->
+  <section class="section reveal" id="how-it-works">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">[02] How it works</span>
+        <h2>Three steps. No extra logistics.</h2>
+      </div>
+
+      <div class="persona-panel" data-persona="shop">
+        <div class="steps">
+          <div class="step">
+            <div class="step__bar" aria-hidden="true"></div>
+            <span class="step__num">Step 01</span>
+            <h3>Request it</h3>
+            <p>Tell us what you want and where it's coming from. Takes under two minutes.</p>
+          </div>
+          <div class="step">
+            <div class="step__bar" aria-hidden="true"></div>
+            <span class="step__num">Step 02</span>
+            <h3>Get matched</h3>
+            <p>We connect you with a verified traveler already booked on that exact route.</p>
+          </div>
+          <div class="step">
+            <div class="step__bar" aria-hidden="true"></div>
+            <span class="step__num">Step 03</span>
+            <h3>Receive it</h3>
+            <p>Funds release from escrow only once you confirm the item is in your hands.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-panel" data-persona="travel">
+        <div class="steps">
+          <div class="step">
+            <div class="step__bar" aria-hidden="true"></div>
+            <span class="step__num">Step 01</span>
+            <h3>Post your trip</h3>
+            <p>Add your flight, route, and how much spare luggage space you've got.</p>
+          </div>
+          <div class="step">
+            <div class="step__bar" aria-hidden="true"></div>
+            <span class="step__num">Step 02</span>
+            <h3>Get matched</h3>
+            <p>Browse verified requests along your route and accept the ones that work for you.</p>
+          </div>
+          <div class="step">
+            <div class="step__bar" aria-hidden="true"></div>
+            <span class="step__num">Step 03</span>
+            <h3>Hand off &amp; get paid</h3>
+            <p>Drop the item with the shopper or a verified vendor hub. Payout lands instantly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ESCROW / TRUST ============================ -->
+  <section class="section reveal" id="trust-mechanics">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Protected, every step</span>
+        <h2>Where the money actually sits.</h2>
+        <p>Every transaction runs through escrow. Nobody gets paid — and nobody loses money — until the handoff is confirmed.</p>
+      </div>
+
+      <div class="escrow-cols">
+        <div class="escrow-col">
+          <span class="stamp"><i class="fa-solid fa-check"></i> Escrowed</span>
+          <h3><i class="fa-solid fa-vault" aria-hidden="true"></i> If you're shopping</h3>
+          <div class="flight-path" aria-hidden="true">
+            <span class="dot"></span><span class="line"><i class="fa-solid fa-plane plane"></i></span><span class="dot"></span>
+          </div>
+          <ul class="escrow-list">
+            <li><b>01</b><span>You pay in. The full amount is held, not released, the moment you confirm a match.</span></li>
+            <li><b>02</b><span>Your traveler picks up the item and flies your route.</span></li>
+            <li><b>03</b><span>You confirm delivery — only then does escrow release the funds.</span></li>
+            <li><b>04</b><span>Anything goes wrong before that? You're refunded in full.</span></li>
+          </ul>
+        </div>
+        <div class="escrow-col">
+          <span class="stamp"><i class="fa-solid fa-check"></i> Escrowed</span>
+          <h3><i class="fa-solid fa-shield-heart" aria-hidden="true"></i> If you're traveling</h3>
+          <div class="flight-path" aria-hidden="true">
+            <span class="dot"></span><span class="line"><i class="fa-solid fa-plane plane"></i></span><span class="dot"></span>
+          </div>
+          <ul class="escrow-list">
+            <li><b>01</b><span>You accept a request. The payout amount locks in escrow immediately.</span></li>
+            <li><b>02</b><span>You carry the item — same as anything else in your bag.</span></li>
+            <li><b>03</b><span>You confirm handoff with a photo and a unique code.</span></li>
+            <li><b>04</b><span>Payout releases to you instantly. No chasing, no waiting on invoices.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ REST BEAT ============================ -->
+  <div class="rest-beat">
+    <div class="rest-beat__inner">
+      <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="View from an airplane window above the clouds" loading="lazy">
+      <div class="container">
+        <div class="rest-beat__text">
+          <span class="eyebrow">Right now</span>
+          <h2>Someone's flight already matches your delivery.</h2>
+          <p>Thousands of routes fly every day. BagXtra just makes sure your item is on the right one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ VENDOR NETWORK ============================ -->
+  <section class="section reveal" id="vendors">
+    <div class="container">
+      <div class="vendor-grid">
+        <div>
+          <span class="eyebrow">[04] Vendor network</span>
+          <h2>Every handoff happens somewhere safe.</h2>
+          <p style="color:var(--text-muted); margin-top:1rem;">Local vendor partners near major airports give travelers and shoppers a secure, neutral place to exchange items — no awkward meetups, no guesswork.</p>
+          <ul class="vendor-points">
+            <li><span class="vicon"><i class="fa-solid fa-bag-shopping"></i></span><div><strong>Shoppers</strong><span>Pick up your item at a verified vendor hub near you. No direct meetups, no risk.</span></div></li>
+            <li><span class="vicon"><i class="fa-solid fa-suitcase-rolling"></i></span><div><strong>Travelers</strong><span>Drop off after landing and walk away. No direct contact with the shopper required.</span></div></li>
+            <li><span class="vicon"><i class="fa-solid fa-store"></i></span><div><strong>Vendors</strong><span>Earn a commission on every exchange you facilitate — consistent extra income from foot traffic you already have.</span></div></li>
+          </ul>
+          <div class="hero__actions" style="margin-top:2rem;">
+            <a class="btn-bx btn-bx-primary" href="mailto:bagxtra.team@gmail.com?subject=Vendor%20Partnership%20Inquiry">Become a vendor partner <span class="btn-arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <div class="vendor-photo">
+          <span class="washi right" style="top:14px;"></span>
+          <img src="https://images.unsplash.com/photo-1556742111-a301076d9d18?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="A small local shop counter, the kind of neutral hub vendor partners provide" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ TESTIMONIALS ============================ -->
+  <section class="section reveal" id="trust">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">[05] Trust &amp; safety</span>
+        <h2>Real people. Real deliveries.</h2>
+        <p>From our early pilot, before the platform went live.</p>
+      </div>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="ticket testi-card">
+            <span class="route-tag">JFK → LOS · iPhone, household goods</span>
+            <p>"I was able to get clothes from the UK in less than a week, and I paid much less than DHL. The process felt personal and safe."</p>
+            <div class="testi-who">
+              <span class="avatar" style="background:var(--plum);">C</span>
+              <div><strong>Chidinma</strong><span>Shopper · Lagos</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="ticket testi-card">
+            <span class="route-tag">YYZ → LOS · two packages, one trip</span>
+            <p>"On my trip back from Canada, I helped deliver two packages through BagXtra's manual system and earned extra cash. It was straightforward and stress-free."</p>
+            <div class="testi-who">
+              <span class="avatar" style="background:var(--rose);">D</span>
+              <div><strong>Daniel</strong><span>Traveler · Toronto → Lagos</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="ticket testi-card">
+            <span class="route-tag">MMIA hub · drop-off &amp; pickup</span>
+            <p>"I run a small store near the airport, and during the manual trial I acted as a drop-off point. It made the process more secure and convenient for both sides."</p>
+            <div class="testi-who">
+              <span class="avatar" style="background:var(--ink);">M</span>
+              <div><strong>Mrs. Ibrahim</strong><span>Vendor partner · MMIA Lagos</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FOUNDERS ============================ -->
+  <section class="section reveal" id="story">
+    <div class="container">
+      <div class="founders-wrap">
+        <div>
+          <span class="eyebrow">The team</span>
+          <h2 style="margin-top:.6rem;">Built by people who felt the problem.</h2>
+          <p style="margin-top:1.4rem;">BagXtra was born out of our founders' frustration with expensive, unreliable international shipping — getting everyday items from the U.S. to places where access is limited or overpriced shouldn't be this hard.</p>
+          <p>Ikem, Priyanka, and Richard teamed up to build a community-driven alternative that connects shoppers, travelers, and local vendors directly. We believe access to global goods shouldn't depend on where you live — and we're building BagXtra to make that true.</p>
+        </div>
+        <div class="founder-list">
+          <div class="founder">
+            <span class="founder-photo"><img src="https://www.usebagxtra.com/Ikem-Uge.png" alt="Ikemefune Uge, BagXtra co-founder" loading="lazy"></span>
+            <div><strong>Ikemefune (Ikem) Uge</strong><span>Co-Founder</span></div>
+          </div>
+          <div class="founder">
+            <span class="founder-photo"><img src="https://www.usebagxtra.com/Priyanka-Ramkumar.png" alt="Priyanka Ramkumar, BagXtra co-founder" loading="lazy"></span>
+            <div><strong>Priyanka Ramkumar</strong><span>Co-Founder</span></div>
+          </div>
+          <div class="founder">
+            <span class="founder-photo"><img src="https://www.usebagxtra.com/Richard-Kurniadi.png" alt="Richard Kurniadi, BagXtra co-founder" loading="lazy"></span>
+            <div><strong>Richard Kurniadi</strong><span>Co-Founder</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FAQ ============================ -->
+  <section class="section reveal" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Questions, answered</span>
+        <h2>Good questions. Straight answers.</h2>
+      </div>
+
+      <div class="persona-panel" data-persona="shop">
+        <div class="faq-list accordion" id="faqShop">
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shopQ1"><span class="num">01</span><span>How do I know my item will actually arrive?</span></button></h3>
+            <div id="shopQ1" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">Your payment stays in escrow until you confirm delivery. Travelers are verified and must provide photo proof and a unique code at handoff. If something goes wrong, you're refunded.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shopQ2"><span class="num">02</span><span>Do I have to pay upfront for the item I'm delivering?</span></button></h3>
+            <div id="shopQ2" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">You pay the item's price plus the traveler's fee when you confirm a match, but that money sits in escrow — it only reaches the traveler once you've confirmed the item arrived in good condition.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shopQ3"><span class="num">03</span><span>How do I partner with BagXtra as a vendor?</span></button></h3>
+            <div id="shopQ3" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">Reach out through the vendor network section above or email us directly. We'll verify your location and list you as an official drop-off and pickup hub.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shopQ4"><span class="num">04</span><span>Is this legal and safe in my country?</span></button></h3>
+            <div id="shopQ4" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">BagXtra only allows store-bought, personal-use items that comply with standard airline luggage rules and customs declarations — the same items travelers already carry for friends and family. Shoppers and travelers are each responsible for confirming an item meets their destination's import rules.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shopQ5"><span class="num">05</span><span>What happens if the traveler cancels or my item is delayed?</span></button></h3>
+            <div id="shopQ5" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">Your funds stay safely in escrow. We'll match you with another verified traveler on a similar route — or refund you in full if you'd rather not wait.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-panel" data-persona="travel">
+        <div class="faq-list accordion" id="faqTravel">
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#travQ1"><span class="num">01</span><span>Is it legal to carry items for others?</span></button></h3>
+            <div id="travQ1" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">Yes — as long as the items are store-bought, declared honestly at customs, and within standard airline luggage allowances. BagXtra only matches travelers with everyday personal items, never anything restricted.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#travQ2"><span class="num">02</span><span>What if the item gets seized at customs?</span></button></h3>
+            <div id="travQ2" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">This is rare when items are declared correctly. If it happens, your payout is still protected — escrowed funds are resolved through our dispute process rather than left in limbo.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#travQ3"><span class="num">03</span><span>How and when do I get paid?</span></button></h3>
+            <div id="travQ3" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">The moment you confirm handoff — to the shopper directly or at a verified vendor hub — with a photo and your unique code, your payout releases from escrow straight to your account.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#travQ4"><span class="num">04</span><span>How much luggage space do I need?</span></button></h3>
+            <div id="travQ4" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">Most requests fit in 1–3kg of spare space — about what's left in a carry-on after packing your own things. You set your own limit when you post your trip.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FINAL CTA ============================ -->
+  <section class="final-cta" id="cta">
+    <img class="bg" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="" aria-hidden="true">
+    <div class="container">
+      <span class="eyebrow">[06] Get started</span>
+      <h2>Your trip — or your next package — already has a match.</h2>
+      <p>BagXtra is live. No more waitlist, no more guessing what it'll cost to get something across a border.</p>
+      <div class="final-cta__actions">
+        <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=shopper" target="_blank" rel="noopener">I want to shop <span class="btn-arrow" aria-hidden="true">→</span></a>
+        <a class="btn-bx btn-bx-ghost" href="https://app.usebagxtra.com/?ref=landing&amp;as=traveler" target="_blank" rel="noopener">I want to travel &amp; earn <span class="btn-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://www.usebagxtra.com/_next/image?url=%2Fbagxtralogo.png&amp;w=3840&amp;q=75" alt="BagXtra">
+        <p>Peer-to-peer international shipping, powered by people already going your way.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="BagXtra on Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="BagXtra on X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="BagXtra on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#evidence" data-set-mode="shop">For Shoppers</a></li>
+          <li><a href="#evidence" data-set-mode="travel">For Travelers</a></li>
+          <li><a href="#vendors">For Vendors</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#vendors">Vendor Network</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="https://blog.usebagxtra.com/" target="_blank" rel="noopener">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:bagxtra.team@gmail.com">bagxtra.team@gmail.com</a></li>
+          <li><a href="tel:+17202515326">+1 (720) 251-5326</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BagXtra. All rights reserved.</span>
+      <span>Built for shoppers, travelers, and vendors everywhere.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- persona mode toggle ---------- */
+  function setMode(mode){
+    root.setAttribute('data-mode', mode);
+    document.querySelectorAll('[data-mode-btn]').forEach(function(b){
+      b.setAttribute('aria-selected', b.getAttribute('data-mode-btn') === mode ? 'true' : 'false');
+    });
+  }
+  document.querySelectorAll('[data-mode-btn]').forEach(function(btn){
+    btn.addEventListener('click', function(){ setMode(btn.getAttribute('data-mode-btn')); });
+  });
+  document.querySelectorAll('[data-set-mode]').forEach(function(link){
+    link.addEventListener('click', function(){ setMode(link.getAttribute('data-set-mode')); });
+  });
+
+  /* ---------- mobile nav ---------- */
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  if(navToggle && navLinks){
+    navToggle.addEventListener('click', function(){
+      var open = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!open));
+      navLinks.classList.toggle('is-open', !open);
+    });
+    navLinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        navToggle.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('is-open');
+      });
+    });
+  }
+
+  /* ---------- split-flap hero word ---------- */
+  var flapWord = document.getElementById('flapWord');
+  var flapItems = ['iPhone', 'MacBook', 'sneakers', 'skincare haul', 'baby formula', 'PS5'];
+  if(flapWord && !reduceMotion){
+    var fi = 0;
+    setInterval(function(){
+      fi = (fi + 1) % flapItems.length;
+      var inner = flapWord.querySelector('.flap-inner');
+      flapWord.classList.remove('is-flipping');
+      void flapWord.offsetWidth;
+      flapWord.classList.add('is-flipping');
+      setTimeout(function(){ inner.textContent = flapItems[fi]; }, 170);
+    }, 2400);
+  }
+
+  /* ---------- departures board clock ---------- */
+  var boardClock = document.getElementById('boardClock');
+  function tickClock(){
+    if(!boardClock) return;
+    var d = new Date();
+    var hh = String(d.getHours()).padStart(2,'0');
+    var mm = String(d.getMinutes()).padStart(2,'0');
+    boardClock.textContent = hh + ':' + mm;
+  }
+  tickClock();
+  setInterval(tickClock, 15000);
+
+  /* ---------- evidence carousel ---------- */
+  var evidenceCarousel = document.getElementById('evidenceCarousel');
+  var evidenceWrap = document.querySelector('.evidence-carousel-wrap');
+  if(evidenceCarousel){
+    var autoScrollOn = !reduceMotion;
+    var autoScrollSpeed = 0.85;
+    var resumeTimer = null;
+    var lastSetScrollLeft = evidenceCarousel.scrollLeft;
+
+    function pauseAutoScroll(){
+      autoScrollOn = false;
+      if(resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(function(){ if(!reduceMotion) autoScrollOn = true; }, 2200);
+    }
+
+    document.querySelectorAll('.carousel-arrow').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var dir = parseInt(btn.getAttribute('data-dir'), 10) || 1;
+        var card = evidenceCarousel.querySelector('.evidence-card');
+        var amount = card ? (card.getBoundingClientRect().width + 22) * 2 : 540;
+        evidenceCarousel.scrollBy({ left: amount * dir, behavior: reduceMotion ? 'auto' : 'smooth' });
+        pauseAutoScroll();
+      });
+    });
+
+    function autoScrollStep(){
+      if(autoScrollOn && evidenceCarousel){
+        var maxScroll = evidenceCarousel.scrollWidth - evidenceCarousel.clientWidth;
+        if(maxScroll > 0){
+          if(evidenceCarousel.scrollLeft >= maxScroll - 1){
+            evidenceCarousel.scrollLeft = 0;
+          } else {
+            evidenceCarousel.scrollLeft += autoScrollSpeed;
+          }
+        }
+        lastSetScrollLeft = evidenceCarousel.scrollLeft;
+      }
+      requestAnimationFrame(autoScrollStep);
+    }
+    if(!reduceMotion){ requestAnimationFrame(autoScrollStep); }
+
+    /* only pause for genuine user-driven scroll (drag/swipe), not incidental
+       touch events from scrolling the page past this section */
+    evidenceCarousel.addEventListener('scroll', function(){
+      if(Math.abs(evidenceCarousel.scrollLeft - lastSetScrollLeft) > 2){
+        pauseAutoScroll();
+      }
+    }, { passive:true });
+
+    if(evidenceWrap){
+      evidenceWrap.addEventListener('mouseenter', function(){ autoScrollOn = false; if(resumeTimer) clearTimeout(resumeTimer); });
+      evidenceWrap.addEventListener('mouseleave', pauseAutoScroll);
+    }
+  }
+
+  /* ---------- shop calculator ---------- */
+  var shopOrigin = document.getElementById('shopOrigin');
+  var shopValue = document.getElementById('shopValue');
+  var shopCourier = document.getElementById('shopCourier');
+  var shopBagx = document.getElementById('shopBagx');
+  var shopSave = document.getElementById('shopSave');
+  function calcShop(){
+    if(!shopValue) return;
+    var v = Math.max(20, Math.min(3000, parseFloat(shopValue.value) || 0));
+    var mult = parseFloat(shopOrigin.value) || 1;
+    var courier = (v * 0.45 + 60) * mult;
+    var bagx = (v * 0.15 + 25) * mult;
+    var save = Math.round(((courier - bagx) / courier) * 100);
+    shopCourier.textContent = '$' + Math.round(courier);
+    shopBagx.textContent = '$' + Math.round(bagx);
+    shopSave.textContent = 'Save ' + save + '%';
+  }
+  [shopOrigin, shopValue].forEach(function(el){ if(el) el.addEventListener('input', calcShop); });
+  calcShop();
+
+  /* ---------- travel calculator ---------- */
+  var travelSpace = document.getElementById('travelSpace');
+  var travelSpaceVal = document.getElementById('travelSpaceVal');
+  var travelPayout = document.getElementById('travelPayout');
+  function calcTravel(){
+    if(!travelSpace) return;
+    var kg = parseFloat(travelSpace.value) || 1;
+    travelSpaceVal.textContent = kg + 'kg';
+    var low = Math.round(kg * 15);
+    var high = Math.round(kg * 25);
+    travelPayout.textContent = '$' + low + '–$' + high;
+  }
+  if(travelSpace){ travelSpace.addEventListener('input', calcTravel); calcTravel(); }
+
+  /* ---------- count-up stats ---------- */
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    if(reduceMotion){ el.textContent = target + suffix; return; }
+    var start = 0, dur = 1100, t0 = null;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var val = Math.round(start + (target - start) * eased);
+      el.textContent = val + suffix;
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- scroll reveal (+ stat trigger) ---------- */
+  if('IntersectionObserver' in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+    var statIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ animateCount(e.target); statIo.unobserve(e.target); }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.stat-num').forEach(function(el){ statIo.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+    document.querySelectorAll('.stat-num').forEach(function(el){ animateCount(el); });
+  }
+
+  /* ---------- scroll-margin for sticky nav anchors ---------- */
+  var navHeight = document.querySelector('.site-nav');
+  if(navHeight){
+    var h = navHeight.offsetHeight + 16;
+    document.querySelectorAll('main section[id], #faq, #vendors, #story, #trust, #cta').forEach(function(s){
+      s.style.scrollMarginTop = h + 'px';
+    });
+  }
+})();
+</script>
+</body>
+</html>
