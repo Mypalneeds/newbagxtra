@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BagXtra — Your Item Is Already Boarding</title>
-<meta name="description" content="Send items internationally with verified travelers already flying your route. BagXtra is live — match, escrow-protect your money, and deliver borderless.">
+<title>BagXtra - Shop From Abroad. One Traveler Away.</title>
+<meta name="description" content="A verified traveler buys your item in-store and carries it home for you. BagXtra sets and confirms your price up front, before you pay.">
 <link rel="icon" href="https://www.usebagxtra.com/_next/image?url=%2Fbagxtralogo.png&w=3840&q=75">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Montserrat:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Montserrat:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 
 <!-- Bootstrap 5 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@
   --ease: cubic-bezier(.16,1,.3,1);
   --container: 1240px;
 
-  --font-display:'Fraunces', serif;
+  --font-display:'Playfair Display', serif;
   --font-body:'Montserrat', sans-serif;
   --font-mono:'JetBrains Mono', monospace;
   --font-hand:'Caveat', cursive;
@@ -83,7 +83,11 @@ body{
 img{max-width:100%;display:block;}
 a{color:inherit;}
 .container{max-width:var(--container); margin-inline:auto; padding-inline:clamp(1.25rem,4vw,3rem);}
-h1,h2,h3{font-family:var(--font-display); margin:0; font-weight:600; letter-spacing:-.01em;}
+h1,h2,h3{font-family:var(--font-display); margin:0; font-weight:700; letter-spacing:-.01em;}
+/* Section h2/h3 use Montserrat at heavy weight per spec */
+h2,h3{ font-family:var(--font-body); font-weight:800; }
+/* Hero headlines and final CTA keep Playfair Display */
+.hero h1, .final-cta h2{ font-family:var(--font-display); }
 p{margin:0;}
 button{font-family:inherit;}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
@@ -273,7 +277,8 @@ button{font-family:inherit;}
    ============================================================ */
 .stats-strip{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding-block:var(--sp-4); }
 .stats-strip .row > div{ text-align:center; padding-block:.6rem; }
-.stat-num{ font-family:var(--font-mono); font-weight:700; font-size:var(--fs-stat); color:var(--accent); line-height:1; }
+.stat-num{ font-family:var(--font-mono); font-weight:700; font-size:var(--fs-stat); color:var(--accent); line-height:1; word-break:break-word; }
+.stat-num.is-text{ font-size:clamp(1.4rem, 1rem + 1.5vw, 2rem); }
 .stat-label{ margin-top:.5rem; color:var(--text-muted); font-size:.85rem; }
 
 /* ============================================================
@@ -315,7 +320,7 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
 .board{ background:var(--board-bg); border-radius:var(--radius-m); overflow:hidden; box-shadow:var(--shadow); }
 .board__head{ display:flex; align-items:center; justify-content:space-between; padding:1rem 1.4rem; border-bottom:1px solid rgba(255,255,255,.12); }
 .board__head span{ font-family:var(--font-mono); color:var(--board-text); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; opacity:.7; }
-.board__head .dot-live{ width:8px; height:8px; border-radius:50%; background:#3FE08A; display:inline-block; margin-right:.5em; box-shadow:0 0 0 4px rgba(63,224,138,.25); animation:pulse 1.8s infinite; }
+
 @keyframes pulse{ 50%{ opacity:.4; } }
 .board__row{ display:grid; grid-template-columns: 1.4fr 2.2fr 1.4fr 1.3fr; gap:1rem; align-items:center; padding:.85rem 1.4rem; font-family:var(--font-mono); color:var(--board-text); border-bottom:1px solid rgba(255,255,255,.07); font-size:.92rem; }
 .board__row:last-child{ border-bottom:none; }
@@ -361,17 +366,6 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
 .escrow-col .stamp{ position:absolute; top:1.4rem; right:1.4rem; }
 @media (max-width:880px){ .escrow-cols{ grid-template-columns:1fr; } .escrow-col .stamp{ display:none; } }
 
-/* ============================================================
-   ATMOSPHERIC REST BEAT
-   ============================================================ */
-.rest-beat{ position:relative; padding-block:0; border-top:1px solid var(--line); overflow:hidden;}
-.rest-beat__inner{ position:relative; min-height:clamp(320px,42vw,460px); display:flex; align-items:center; }
-.rest-beat img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.rest-beat::after{ content:""; position:absolute; inset:0; background:linear-gradient(100deg, rgba(10,6,13,.82) 0%, rgba(10,6,13,.55) 45%, rgba(10,6,13,.15) 75%, transparent 95%); }
-.rest-beat__text{ position:relative; z-index:1; max-width:560px; padding:clamp(2.4rem,6vw,0) clamp(1.25rem,4vw,3rem); margin-inline:auto; width:100%; }
-.rest-beat__text .eyebrow{ color:#fff; opacity:.9; }
-.rest-beat__text h2{ color:#fff; font-size:var(--fs-h2); margin-top:.7rem; line-height:1.08; text-shadow:0 4px 24px rgba(0,0,0,.35); }
-.rest-beat__text p{ color:rgba(255,255,255,.85); margin-top:1rem; font-size:1.05rem; }
 
 /* ============================================================
    VENDOR NETWORK
@@ -492,6 +486,31 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
   :root{ --fs-h2: clamp(1.6rem, 1.3rem + 3vw, 2.4rem); }
 }
 
+/* ============================================================
+   TRUST STRIP (P0.2 — buy-then-carry 4-step)
+   ============================================================ */
+.trust-strip{ padding-block:var(--sp-4); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+/* Outer wrapper is just a block — flex lives inside each trust-steps row */
+.trust-steps{ display:flex; flex-wrap:nowrap; gap:0; justify-content:stretch; width:100%; }
+.trust-step{ flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; padding:1.1rem .9rem; position:relative; }
+.trust-step + .trust-step::before{ content:""; position:absolute; left:0; top:50%; transform:translateY(-50%); width:1px; height:36px; background:var(--line-strong); }
+.trust-step .ts-icon{ width:40px; height:40px; border-radius:50%; background:var(--surface-2); border:2px solid var(--line-strong); display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:.95rem; margin-bottom:.6rem; flex-shrink:0; }
+.trust-step .ts-num{ font-family:var(--font-mono); font-size:.65rem; letter-spacing:.1em; color:var(--accent); margin-bottom:.25rem; }
+.trust-step strong{ font-weight:700; font-size:.88rem; display:block; }
+.trust-step span{ color:var(--text-muted); font-size:.77rem; margin-top:.2rem; display:block; }
+@media (max-width:600px){
+  .trust-steps{ flex-wrap:wrap; }
+  .trust-step{ flex:1 1 45%; }
+  .trust-step + .trust-step::before{ display:none; }
+}
+
+/* ============================================================
+   STICKY MOBILE CTA (P2.2)
+   ============================================================ */
+@media (max-width:700px){
+  .site-footer{ padding-bottom:calc(var(--sp-4) + 70px); }
+}
+
 </style>
 </head>
 <body>
@@ -506,8 +525,8 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
     <nav>
       <ul class="site-nav__links" id="navLinks">
         <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#evidence" data-set-mode="shop">For Shoppers</a></li>
-        <li><a href="#evidence" data-set-mode="travel">For Travelers</a></li>
+        <li><a href="#top" data-set-mode="shop" data-scroll-top="true">For Shoppers</a></li>
+        <li><a href="#top" data-set-mode="travel" data-scroll-top="true">For Travelers</a></li>
         <li><a href="#vendors">For Vendors</a></li>
         <li><a href="https://blog.usebagxtra.com/" target="_blank" rel="noopener">Blog</a></li>
       </ul>
@@ -560,7 +579,7 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
           <div class="persona-panel" data-persona="shop">
             <span class="eyebrow">For shoppers</span>
             <h1>Your <span class="flap-word" id="flapWord" aria-live="polite"><span class="flap-inner">iPhone</span></span> is already in someone's carry&#8209;on.</h1>
-            <p class="lede">Buy from any store abroad and get it brought to you by a verified traveler already booked on your route — for a fraction of what courier shipping costs.</p>
+            <p class="lede">A verified traveler buys your item in-store on your behalf and carries it home. BagXtra sets and confirms the price up front, before you pay.</p>
             <div class="hero__actions">
               <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=shopper" target="_blank" rel="noopener">Find a traveler <span class="btn-arrow" aria-hidden="true">→</span></a>
               <a class="btn-bx btn-bx-ghost" href="#how-it-works">See how it works</a>
@@ -570,7 +589,7 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
           <div class="persona-panel" data-persona="travel">
             <span class="eyebrow">For travelers</span>
             <h1>Turn your carry&#8209;on into a paycheck.</h1>
-            <p class="lede">List your upcoming flight, carry a few verified store-bought items, and get paid the moment you hand them off — guaranteed before you ever board.</p>
+            <p class="lede">List your upcoming flight, buy a few verified items in-store on shoppers' behalf, and get paid the moment you hand them off. Your payout is locked before you board.</p>
             <div class="hero__actions">
               <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=traveler" target="_blank" rel="noopener">List your trip <span class="btn-arrow" aria-hidden="true">→</span></a>
               <a class="btn-bx btn-bx-ghost" href="#how-it-works">See how it works</a>
@@ -578,9 +597,9 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
           </div>
 
           <div class="hero__mini-features">
-            <span class="hero__mini-feature"><span class="mf-icon" aria-hidden="true"><i class="fa-solid fa-id-badge"></i></span>Verified travelers, every trip</span>
-            <span class="hero__mini-feature"><span class="mf-icon" aria-hidden="true"><i class="fa-solid fa-vault"></i></span>Funds held in escrow</span>
-            <span class="hero__mini-feature"><span class="mf-icon" aria-hidden="true"><i class="fa-solid fa-store"></i></span>Vendor pickup hubs near you</span>
+            <span class="hero__mini-feature"><span class="mf-icon" aria-hidden="true"><i class="fa-solid fa-bag-shopping"></i></span>Traveler buys it in-store for you</span>
+            <span class="hero__mini-feature"><span class="mf-icon" aria-hidden="true"><i class="fa-solid fa-tag"></i></span>BagXtra sets your price up front</span>
+            <span class="hero__mini-feature"><span class="mf-icon" aria-hidden="true"><i class="fa-solid fa-vault"></i></span>Funds held in escrow until delivery</span>
           </div>
 
           <div class="hero__floaters-mobile" aria-hidden="true">
@@ -599,52 +618,75 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
           </div>
         </div>
 
-        <div class="hero__visual">
-          <div class="hero__photo-card">
-            <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Travelers walking through an airport terminal with their luggage" loading="lazy">
-            <span class="hero__float-badge a"><i class="fa-solid fa-shield-check"></i> Escrow protected</span>
-            <span class="hero__float-badge b"><i class="fa-solid fa-plane-departure"></i> JFK → LOS · boarding</span>
-          </div>
+        <div class="hero__visual" style="display:flex;flex-direction:column;gap:1.4rem;">
 
-          <!-- SHOP calculator -->
+          <!-- SHOP calculator: focal point, above fold -->
+          <div class="ticket calc-card persona-panel" data-persona="shop">
           <div class="ticket calc-card persona-panel" data-persona="shop">
             <span class="ticket-notch left" aria-hidden="true"></span>
             <span class="ticket-notch right" aria-hidden="true"></span>
             <div class="calc-card__head">
-              <span>Item ticket — estimate</span>
+              <span>Item ticket: estimate</span>
               <strong>BAGXTRA</strong>
             </div>
             <div class="calc-row">
               <div class="calc-field">
-                <label for="shopOrigin">Buying from</label>
-                <select id="shopOrigin">
-                  <option value="1.0">United States</option>
-                  <option value="1.05">United Kingdom</option>
-                  <option value="0.95">United Arab Emirates</option>
-                  <option value="1.0">Canada</option>
+                <label for="shopDest">Delivered to</label>
+                <select id="shopDest">
+                  <optgroup label="West Africa">
+                    <option value="1">Nigeria</option>
+                    <option value="1">Ghana</option>
+                    <option value="1">Ethiopia</option>
+                    <option value="1">Egypt</option>
+                  </optgroup>
+                  <optgroup label="South Asia &amp; Caribbean">
+                    <option value="1">Pakistan</option>
+                    <option value="1">Bangladesh</option>
+                    <option value="1">Lebanon</option>
+                    <option value="1">Haiti</option>
+                  </optgroup>
+                  <optgroup label="East Africa &amp; Americas">
+                    <option value="2">Kenya</option>
+                    <option value="2">South Africa</option>
+                    <option value="2">Morocco</option>
+                    <option value="2">India</option>
+                    <option value="2">Turkey</option>
+                    <option value="2">Jamaica</option>
+                    <option value="2">Mexico</option>
+                    <option value="2">Brazil</option>
+                    <option value="2">Colombia</option>
+                    <option value="2">Philippines</option>
+                  </optgroup>
+                  <optgroup label="Gulf, Europe &amp; Asia-Pacific">
+                    <option value="3">UAE</option>
+                    <option value="3">Canada</option>
+                    <option value="3">United Kingdom</option>
+                    <option value="3">Germany</option>
+                    <option value="3">France</option>
+                    <option value="3">Australia</option>
+                  </optgroup>
                 </select>
               </div>
               <div class="calc-field">
-                <label for="shopDest">Delivered to</label>
-                <select id="shopDest">
-                  <option>Lagos</option>
-                  <option>Abuja</option>
-                  <option>Port Harcourt</option>
-                </select>
+                <label for="shopValue">Item price (USD)</label>
+                <input type="number" id="shopValue" min="20" max="3000" step="10" value="300">
               </div>
             </div>
-            <div class="calc-field" style="margin-bottom:1.1rem;">
-              <label for="shopValue">Item value (USD)</label>
-              <input type="number" id="shopValue" min="20" max="3000" step="10" value="300">
+            <button class="calc-local-toggle" type="button" id="localToggle" style="background:none;border:none;padding:0;font-family:var(--font-mono);font-size:.75rem;color:var(--accent);cursor:pointer;text-align:left;text-decoration:underline dotted;margin-bottom:.8rem;">+ Compare with my local price</button>
+            <div id="localRow" style="display:none;margin-bottom:.8rem;">
+              <div class="calc-field">
+                <label for="localPrice">Your local retail price (USD)</label>
+                <input type="number" id="localPrice" min="0" max="9999" step="10" placeholder="e.g. 600">
+              </div>
             </div>
             <hr class="ticket-divider calc-divider">
             <div class="calc-output">
-              <div class="num"><small>Courier estimate</small><span id="shopCourier">$195</span></div>
-              <div class="num"><small>BagXtra estimate</small><span id="shopBagx" style="color:var(--accent)">$70</span></div>
-              <span class="calc-badge" id="shopSave">Save 64%</span>
+              <div class="num"><small>All-in via BagXtra</small><span id="shopBagx">$375</span></div>
+              <div class="num"><small id="shopSaveLabel">vs. illustrative local retail</small><span id="shopSave" style="color:var(--accent)">~27% off</span></div>
+              <a class="calc-badge" id="shopCta" href="https://app.usebagxtra.com/?ref=landing&amp;as=shopper" target="_blank" rel="noopener" data-app-link="true">Get this price in-app</a>
             </div>
             <div class="barcode" aria-hidden="true"></div>
-            <p class="calc-fine">Illustrative example, not a quote — your traveler sets the final fee in-app.</p>
+            <p class="calc-fine">BagXtra sets and confirms your final price up front, before you pay. Illustrative estimate only. Insurance and fragile add-ons not included.</p>
           </div>
 
           <!-- TRAVEL calculator -->
@@ -652,35 +694,78 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
             <span class="ticket-notch left" aria-hidden="true"></span>
             <span class="ticket-notch right" aria-hidden="true"></span>
             <div class="calc-card__head">
-              <span>Boarding ticket — estimate</span>
+              <span>Payout estimate</span>
               <strong>BAGXTRA</strong>
             </div>
             <div class="calc-row">
               <div class="calc-field">
-                <label for="travelFrom">From</label>
-                <select id="travelFrom">
-                  <option>JFK</option><option>LHR</option><option>YYZ</option><option>ATL</option>
+                <label for="travelDest">Route to</label>
+                <select id="travelDest">
+                  <optgroup label="Tier 1 - highest payout">
+                    <option value="1">Nigeria</option>
+                    <option value="1">Ghana</option>
+                    <option value="1">Ethiopia</option>
+                    <option value="1">Egypt</option>
+                    <option value="1">Pakistan</option>
+                    <option value="1">Bangladesh</option>
+                  </optgroup>
+                  <optgroup label="Tier 2">
+                    <option value="2">Kenya</option>
+                    <option value="2">South Africa</option>
+                    <option value="2">India</option>
+                    <option value="2">Mexico</option>
+                    <option value="2">Philippines</option>
+                  </optgroup>
+                  <optgroup label="Tier 3">
+                    <option value="3">UAE</option>
+                    <option value="3">Canada</option>
+                    <option value="3">United Kingdom</option>
+                    <option value="3">Germany</option>
+                  </optgroup>
                 </select>
               </div>
               <div class="calc-field">
-                <label for="travelTo">To</label>
-                <select id="travelTo">
-                  <option>LOS</option><option>ACC</option><option>NBO</option>
-                </select>
+                <label for="travelItemVal">Item value (USD)</label>
+                <input type="number" id="travelItemVal" min="20" max="3000" step="10" value="300">
               </div>
-            </div>
-            <div class="calc-field" style="margin-bottom:.4rem;">
-              <label for="travelSpace">Spare luggage space <span class="range-value" id="travelSpaceVal">3kg</span></label>
-              <input type="range" id="travelSpace" min="1" max="10" step="1" value="3">
             </div>
             <hr class="ticket-divider calc-divider">
             <div class="calc-output">
-              <div class="num"><small>Estimated payout</small><span id="travelPayout">$45–$75</span></div>
-              <span class="calc-badge">Guaranteed at hand-off</span>
+              <div class="num"><small>Your payout</small><span id="travelPayout">$52</span></div>
+              <span class="calc-badge">Locked before you fly</span>
             </div>
             <div class="barcode" aria-hidden="true"></div>
-            <p class="calc-fine">Illustrative example, not a quote — your payout locks in when you accept a request.</p>
+            <p class="calc-fine">BagXtra sets and confirms your payout before you commit. Illustrative estimate only. Your payout locks when you accept a request.</p>
           </div>
+
+          <!-- photo card: decorative, below calc -->
+          <div class="hero__photo-card" style="aspect-ratio:16/6;margin-bottom:0;">
+            <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Travelers walking through an airport terminal with their luggage" loading="lazy">
+            <span class="hero__float-badge a"><i class="fa-solid fa-shield-check"></i> Escrow protected</span>
+            <span class="hero__float-badge b"><i class="fa-solid fa-bag-shopping"></i> Bought in-store, verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ TRUST STRIP (P0.2) ============================ -->
+  <section class="trust-strip reveal">
+    <div class="container">
+      <div class="persona-panel" data-persona="shop">
+        <div class="trust-steps">
+          <div class="trust-step"><div class="ts-icon"><i class="fa-solid fa-bag-shopping"></i></div><div class="ts-num">Step 01</div><strong>Traveler buys it</strong><span>In-store, on your behalf</span></div>
+          <div class="trust-step"><div class="ts-icon"><i class="fa-solid fa-tag"></i></div><div class="ts-num">Step 02</div><strong>BagXtra sets the price</strong><span>Confirmed before you pay</span></div>
+          <div class="trust-step"><div class="ts-icon"><i class="fa-solid fa-lock"></i></div><div class="ts-num">Step 03</div><strong>Payment protected</strong><span>Held in escrow by Stripe</span></div>
+          <div class="trust-step"><div class="ts-icon"><i class="fa-solid fa-box-open"></i></div><div class="ts-num">Step 04</div><strong>It's yours</strong><span>Released on confirmed delivery</span></div>
+        </div>
+      </div>
+      <div class="persona-panel" data-persona="travel">
+        <div class="trust-steps">
+          <div class="trust-step"><div class="ts-icon"><i class="fa-solid fa-list-check"></i></div><div class="ts-num">Step 01</div><strong>Post your trip</strong><span>Route, date, spare space</span></div>
+          <div class="trust-step"><div class="ts-icon"><i class="fa-solid fa-tag"></i></div><div class="ts-num">Step 02</div><strong>Payout locked in</strong><span>BagXtra confirms before you fly</span></div>
+          <div class="trust-step"><div class="ts-icon"><i class="fa-solid fa-bag-shopping"></i></div><div class="ts-num">Step 03</div><strong>Buy in-store, carry it</strong><span>Just like anything in your bag</span></div>
+          <div class="trust-step"><div class="ts-icon"><i class="fa-solid fa-bolt"></i></div><div class="ts-num">Step 04</div><strong>Instant payout</strong><span>On confirmed handoff</span></div>
         </div>
       </div>
     </div>
@@ -689,45 +774,95 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
   <!-- ============================ STATS STRIP ============================ -->
   <section class="stats-strip reveal">
     <div class="container">
-      <div class="row gy-3">
-        <div class="col-6 col-md-3">
-          <div class="stat-num" data-count="3" data-suffix="">3</div>
-          <div class="stat-label">cities with a working pilot — Lagos, Toronto, Accra</div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="stat-num" data-count="64" data-suffix="%">0%</div>
-          <div class="stat-label">typical savings vs. courier shipping</div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="stat-num" data-count="2" data-suffix=" min">0 min</div>
-          <div class="stat-label">average time to post a request</div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="stat-num" data-count="100" data-suffix="%">0%</div>
-          <div class="stat-label">of funds held in escrow until handoff</div>
+
+      <div class="persona-panel" data-persona="shop">
+        <div class="row gy-3">
+          <div class="col-6 col-md-3" style="text-align:center;padding-block:.6rem;">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Active pilot routes: Lagos, Toronto, Accra</div>
+          </div>
+          <div class="col-6 col-md-3" style="text-align:center;padding-block:.6rem;">
+            <div class="stat-num">~20–30%</div>
+            <div class="stat-label">Typical saving vs. local retail price</div>
+          </div>
+          <div class="col-6 col-md-3" style="text-align:center;padding-block:.6rem;">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Of funds held in escrow until delivery confirmed</div>
+          </div>
+          <div class="col-6 col-md-3" style="text-align:center;padding-block:.6rem;">
+            <div class="stat-num is-text">ID-verified</div>
+            <div class="stat-label">Every traveler is identity-checked before carrying</div>
+          </div>
         </div>
       </div>
+
+      <div class="persona-panel" data-persona="travel">
+        <div class="row gy-3">
+          <div class="col-6 col-md-3" style="text-align:center;padding-block:.6rem;">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Active pilot routes with requests already waiting</div>
+          </div>
+          <div class="col-6 col-md-3" style="text-align:center;padding-block:.6rem;">
+            <div class="stat-num">$40–$90</div>
+            <div class="stat-label">Typical payout per item on a Tier 1 route</div>
+          </div>
+          <div class="col-6 col-md-3" style="text-align:center;padding-block:.6rem;">
+            <div class="stat-num is-text">Locked</div>
+            <div class="stat-label">Your payout is locked in escrow before you board</div>
+          </div>
+          <div class="col-6 col-md-3" style="text-align:center;padding-block:.6rem;">
+            <div class="stat-num is-text">ID-verified</div>
+            <div class="stat-label">Full identity verification for every traveler</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- ============================ STORE STRIP ============================ -->
   <section class="section store-strip reveal" style="padding-block:var(--sp-6);">
     <div class="container">
-      <div class="section-head center">
-        <span class="eyebrow">Shop from</span>
-        <h2>Any US store. One traveler away.</h2>
-        <p>If it ships within the United States, there's a good chance someone's already flying it your way.</p>
+
+      <div class="persona-panel" data-persona="shop">
+        <div class="section-head center">
+          <span class="eyebrow">Shop from</span>
+          <h2>Any US store. One traveler away.</h2>
+          <p>If it's sold in the United States, a verified traveler can buy it in-store and bring it to you.</p>
+        </div>
+        <div class="store-row">
+          <span class="store-chip"><i class="fa-brands fa-amazon"></i>Amazon</span>
+          <span class="store-chip"><i class="fa-brands fa-apple"></i>Apple Store</span>
+          <span class="store-chip"><i class="fa-solid fa-store"></i>Walmart</span>
+          <span class="store-chip"><i class="fa-solid fa-bullseye"></i>Target</span>
+          <span class="store-chip"><i class="fa-solid fa-tv"></i>Best Buy</span>
+          <span class="store-chip"><i class="fa-solid fa-shoe-prints"></i>Nike</span>
+          <span class="store-chip"><i class="fa-solid fa-spray-can-sparkles"></i>Sephora</span>
+          <span class="store-chip"><i class="fa-brands fa-ebay"></i>eBay</span>
+        </div>
+        <div style="text-align:center;margin-top:2rem;">
+          <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=shopper" target="_blank" rel="noopener" data-app-link="true">Start a request <span class="btn-arrow" aria-hidden="true">→</span></a>
+        </div>
       </div>
-      <div class="store-row">
-        <span class="store-chip"><i class="fa-brands fa-amazon"></i>Amazon</span>
-        <span class="store-chip"><i class="fa-brands fa-apple"></i>Apple Store</span>
-        <span class="store-chip"><i class="fa-solid fa-store"></i>Walmart</span>
-        <span class="store-chip"><i class="fa-solid fa-bullseye"></i>Target</span>
-        <span class="store-chip"><i class="fa-solid fa-tv"></i>Best Buy</span>
-        <span class="store-chip"><i class="fa-solid fa-shoe-prints"></i>Nike</span>
-        <span class="store-chip"><i class="fa-solid fa-spray-can-sparkles"></i>Sephora</span>
-        <span class="store-chip"><i class="fa-brands fa-ebay"></i>eBay</span>
+
+      <div class="persona-panel" data-persona="travel">
+        <div class="section-head center">
+          <span class="eyebrow">Open requests</span>
+          <h2>These routes have shoppers waiting.</h2>
+          <p>If you're already booked on one of these routes, there's a good chance a request is ready for you.</p>
+        </div>
+        <div class="store-row">
+          <span class="store-chip"><i class="fa-solid fa-plane-departure"></i>JFK to Lagos</span>
+          <span class="store-chip"><i class="fa-solid fa-plane-departure"></i>LHR to Lagos</span>
+          <span class="store-chip"><i class="fa-solid fa-plane-departure"></i>ATL to Accra</span>
+          <span class="store-chip"><i class="fa-solid fa-plane-departure"></i>YYZ to Lagos</span>
+          <span class="store-chip"><i class="fa-solid fa-plane-departure"></i>IAH to Nairobi</span>
+        </div>
+        <div style="text-align:center;margin-top:2rem;">
+          <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=traveler" target="_blank" rel="noopener" data-app-link="true">List your trip <span class="btn-arrow" aria-hidden="true">→</span></a>
+        </div>
       </div>
+
     </div>
   </section>
 
@@ -738,8 +873,8 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
       <div class="persona-panel" data-persona="shop">
         <div class="section-head">
           <span class="eyebrow">Same item, real savings</span>
-          <h2>Half the price. One traveler away.</h2>
-          <p>A look at what shoppers are typically saving when a traveler carries the item instead of a courier.</p>
+          <h2>About 20 to 30% less than local retail.</h2>
+          <p>What shoppers are typically saving when a verified traveler buys and carries an item instead of paying local market prices.</p>
         </div>
         <div class="evidence-carousel-wrap">
           <button class="carousel-arrow prev" type="button" data-dir="-1" aria-label="Scroll to previous items"><i class="fa-solid fa-chevron-left"></i></button>
@@ -841,158 +976,96 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
               </div>
             </div>
 
-            <div class="evidence-card">
-              <div class="ticket compare-card">
-                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Premium hair bundle" loading="lazy"></div>
-                <div class="compare-card__body">
-                  <div class="compare-card__top">
-                    <h3>Premium hair bundle</h3>
-                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-scissors"></i></div>
-                  </div>
-                  <div class="price-row"><span>US store price</span><strong>$140</strong></div>
-                  <div class="price-row"><span>Typical local retail</span><strong>$280</strong></div>
-                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$185</strong></div>
-                  <span class="save-badge">Save ~34%</span>
-                </div>
-              </div>
             </div>
-
-            <div class="evidence-card">
-              <div class="ticket compare-card">
-                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Pair of sneakers" loading="lazy"></div>
-                <div class="compare-card__body">
-                  <div class="compare-card__top">
-                    <h3>Designer sneakers</h3>
-                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-shoe-prints"></i></div>
-                  </div>
-                  <div class="price-row"><span>US store price</span><strong>$180</strong></div>
-                  <div class="price-row"><span>Typical local retail</span><strong>$340</strong></div>
-                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$225</strong></div>
-                  <span class="save-badge">Save ~34%</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="evidence-card">
-              <div class="ticket compare-card">
-                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1551816230-ef5deaed4a26?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Smartwatch on a wrist" loading="lazy"></div>
-                <div class="compare-card__body">
-                  <div class="compare-card__top">
-                    <h3>Apple Watch SE</h3>
-                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-stopwatch"></i></div>
-                  </div>
-                  <div class="price-row"><span>US store price</span><strong>$249</strong></div>
-                  <div class="price-row"><span>Typical local retail</span><strong>$420</strong></div>
-                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$295</strong></div>
-                  <span class="save-badge">Save ~30%</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="evidence-card">
-              <div class="ticket compare-card">
-                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Designer perfume bottle" loading="lazy"></div>
-                <div class="compare-card__body">
-                  <div class="compare-card__top">
-                    <h3>Designer perfume</h3>
-                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-spray-can-sparkles"></i></div>
-                  </div>
-                  <div class="price-row"><span>US store price</span><strong>$85</strong></div>
-                  <div class="price-row"><span>Typical local retail</span><strong>$160</strong></div>
-                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$110</strong></div>
-                  <span class="save-badge">Save ~31%</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="evidence-card">
-              <div class="ticket compare-card">
-                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Wireless headphones" loading="lazy"></div>
-                <div class="compare-card__body">
-                  <div class="compare-card__top">
-                    <h3>Wireless headphones</h3>
-                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-headphones"></i></div>
-                  </div>
-                  <div class="price-row"><span>US store price</span><strong>$179</strong></div>
-                  <div class="price-row"><span>Typical local retail</span><strong>$310</strong></div>
-                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$215</strong></div>
-                  <span class="save-badge">Save ~31%</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="evidence-card">
-              <div class="ticket compare-card">
-                <div class="compare-card__photo"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="Gold jewelry set" loading="lazy"></div>
-                <div class="compare-card__body">
-                  <div class="compare-card__top">
-                    <h3>Gold jewelry set</h3>
-                    <div class="compare-card__icon" aria-hidden="true"><i class="fa-solid fa-gem"></i></div>
-                  </div>
-                  <div class="price-row"><span>US store price</span><strong>$220</strong></div>
-                  <div class="price-row"><span>Typical local retail</span><strong>$420</strong></div>
-                  <div class="price-row win"><span>Example, via BagXtra</span><strong>$280</strong></div>
-                  <span class="save-badge">Save ~33%</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
           <button class="carousel-arrow next" type="button" data-dir="1" aria-label="Scroll to more items"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
-        <p class="evidence-fine">Prices are illustrative examples — actual pricing is set by each traveler when you connect in the app.</p>
+        <p class="evidence-fine">Prices are illustrative examples based on typical local retail. BagXtra sets and confirms your actual price before you pay.</p>
+        <div style="text-align:center;margin-top:2rem;">
+          <a class="btn-bx btn-bx-ghost" href="https://app.usebagxtra.com/?ref=landing&amp;as=shopper" target="_blank" rel="noopener" data-app-link="true">See pricing for your item <span class="btn-arrow" aria-hidden="true">→</span></a>
+        </div>
       </div>
 
       <div class="persona-panel" data-persona="travel">
         <div class="section-head">
-          <span class="eyebrow">Where shoppers need a hand</span>
+          <span class="eyebrow">Sample routes</span>
           <h2>Routes shoppers keep requesting.</h2>
-          <p>If you're already booked on one of these routes, there's a good chance a request is waiting for you. Live look at today's board:</p>
+          <p>These are example routes from our pilot. If you're booked on one, check in-app for live availability.</p>
         </div>
         <div class="board">
           <div class="board__head">
-            <span><span class="dot-live" aria-hidden="true"></span>Departures — request board</span>
+            <span>Sample departures: request board</span>
             <span id="boardClock">--:--</span>
           </div>
           <div class="board__row">
-            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>JFK → LOS</span>
-            <span class="cities">New York → Lagos</span>
-            <span class="cities">3 requests open</span>
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>JFK to LOS</span>
+            <span class="cities">New York to Lagos</span>
+            <span class="cities">Example route</span>
             <span class="board__status board__status--high">High demand</span>
           </div>
           <div class="board__row">
-            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>LHR → LOS</span>
-            <span class="cities">London → Lagos</span>
-            <span class="cities">5 requests open</span>
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>LHR to LOS</span>
+            <span class="cities">London to Lagos</span>
+            <span class="cities">Example route</span>
             <span class="board__status board__status--high">High demand</span>
           </div>
           <div class="board__row">
-            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>ATL → ACC</span>
-            <span class="cities">Atlanta → Accra</span>
-            <span class="cities">2 requests open</span>
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>ATL to ACC</span>
+            <span class="cities">Atlanta to Accra</span>
+            <span class="cities">Example route</span>
             <span class="board__status board__status--mid">Growing demand</span>
           </div>
           <div class="board__row">
-            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>IAH → NBO</span>
-            <span class="cities">Houston → Nairobi</span>
-            <span class="cities">1 request open</span>
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>IAH to NBO</span>
+            <span class="cities">Houston to Nairobi</span>
+            <span class="cities">Example route</span>
             <span class="board__status board__status--mid">Growing demand</span>
           </div>
           <div class="board__row">
-            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>YYZ → MNL</span>
-            <span class="cities">Toronto → Manila</span>
-            <span class="cities">2 requests open</span>
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>YYZ to MNL</span>
+            <span class="cities">Toronto to Manila</span>
+            <span class="cities">Example route</span>
             <span class="board__status board__status--mid">Growing demand</span>
           </div>
           <div class="board__row">
-            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>DFW → CGK</span>
-            <span class="cities">Dallas → Jakarta</span>
-            <span class="cities">1 request open</span>
+            <span class="route-code"><i class="fa-solid fa-plane-departure"></i>DFW to CGK</span>
+            <span class="cities">Dallas to Jakarta</span>
+            <span class="cities">Example route</span>
             <span class="board__status board__status--mid">Growing demand</span>
           </div>
-          <div class="board__fine">Don't see your route? Post your trip anyway — new requests come in daily.</div>
+          <div class="board__fine">Sample routes from our pilot. Not live counts. Check in-app for current requests on your route.</div>
         </div>
-      </div>
+
+        <!-- Notify-me route capture (P2.4) -->
+        <div style="margin-top:1.6rem;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-m);padding:1.4rem 1.6rem;">
+          <p style="font-size:.9rem;color:var(--text-muted);margin-bottom:1rem;">Don't see your route? Tell us where you're flying and we'll reach out when requests are waiting.</p>
+          <div style="display:flex;gap:.7rem;flex-wrap:wrap;">
+            <select id="notifyFrom" aria-label="Flying from" style="font-family:var(--font-body);font-size:.9rem;padding:.7rem .8rem;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);color:var(--text);flex:1;min-width:120px;">
+              <option value="">Flying from...</option>
+              <option>JFK</option><option>LHR</option><option>YYZ</option><option>ATL</option><option>IAH</option><option>DFW</option><option>ORD</option><option>LAX</option><option>DXB</option>
+            </select>
+            <select id="notifyTo" aria-label="Flying to" style="font-family:var(--font-body);font-size:.9rem;padding:.7rem .8rem;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);color:var(--text);flex:1;min-width:120px;">
+              <option value="">Flying to...</option>
+              <option>Nigeria</option><option>Ghana</option><option>Kenya</option><option>Ethiopia</option><option>South Africa</option><option>India</option><option>Philippines</option><option>Pakistan</option><option>Bangladesh</option>
+            </select>
+            <button class="btn-bx btn-bx-primary" type="button" id="notifyBtn" style="padding:.7em 1.2em;font-size:.9rem;">Notify me <span class="btn-arrow" aria-hidden="true">→</span></button>
+          </div>
+          <p id="notifyConfirm" style="display:none;color:var(--accent);font-family:var(--font-mono);font-size:.82rem;margin-top:.8rem;"><i class="fa-solid fa-check"></i> Got it. We'll reach out when requests land on your route.</p>
+        </div>
+
+        <!-- Traveler referral share (P2.3) -->
+        <div style="margin-top:1.8rem;background:var(--surface-2);border:1px dashed var(--line-strong);border-radius:var(--radius-m);padding:1.4rem 1.6rem;">
+          <h4 style="font-size:1rem;font-weight:700;margin-bottom:.5rem;font-family:var(--font-body);">Know someone back home who needs something?</h4>
+          <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:1rem;">Share your personal link and they'll land straight in the shopper experience. You'll be credited when they complete an order.</p>
+          <div style="display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;">
+            <input type="text" id="referralLink" readonly aria-label="Your referral link" style="font-family:var(--font-mono);font-size:.82rem;color:var(--text-muted);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:.6rem .9rem;flex:1;min-width:180px;" value="https://usebagxtra.com/?as=shopper&ref=XXXXXX">
+            <button class="btn-bx btn-bx-ghost" type="button" id="referralCopy" style="padding:.6em 1em;font-size:.85rem;">Copy link</button>
+          </div>
+          <span id="referralCopied" style="display:none;font-family:var(--font-mono);font-size:.78rem;color:var(--accent);margin-top:.5rem;"><i class="fa-solid fa-check"></i> Copied!</span>
+        </div>
+
+        <div style="margin-top:2rem;">
+          <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=traveler" target="_blank" rel="noopener" data-app-link="true">List your trip <span class="btn-arrow" aria-hidden="true">→</span></a>
+        </div>
 
     </div>
   </section>
@@ -1011,20 +1084,23 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
             <div class="step__bar" aria-hidden="true"></div>
             <span class="step__num">Step 01</span>
             <h3>Request it</h3>
-            <p>Tell us what you want and where it's coming from. Takes under two minutes.</p>
+            <p>Tell us what you want and where it's coming from. BagXtra sets and confirms your price up front, before you pay.</p>
           </div>
           <div class="step">
             <div class="step__bar" aria-hidden="true"></div>
             <span class="step__num">Step 02</span>
-            <h3>Get matched</h3>
-            <p>We connect you with a verified traveler already booked on that exact route.</p>
+            <h3>A traveler buys it</h3>
+            <p>A verified traveler purchases the item in-store on your behalf, then carries it on their already-booked flight.</p>
           </div>
           <div class="step">
             <div class="step__bar" aria-hidden="true"></div>
             <span class="step__num">Step 03</span>
-            <h3>Receive it</h3>
-            <p>Funds release from escrow only once you confirm the item is in your hands.</p>
+            <h3>You receive it</h3>
+            <p>Funds release from escrow only once you confirm the item is in your hands and in good condition.</p>
           </div>
+        </div>
+        <div style="margin-top:2.4rem;">
+          <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=shopper" target="_blank" rel="noopener" data-app-link="true">Start a request <span class="btn-arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
 
@@ -1034,20 +1110,23 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
             <div class="step__bar" aria-hidden="true"></div>
             <span class="step__num">Step 01</span>
             <h3>Post your trip</h3>
-            <p>Add your flight, route, and how much spare luggage space you've got.</p>
+            <p>Add your flight, route, and how much spare space you've got. Browse requests already waiting on your route.</p>
           </div>
           <div class="step">
             <div class="step__bar" aria-hidden="true"></div>
             <span class="step__num">Step 02</span>
-            <h3>Get matched</h3>
-            <p>Browse verified requests along your route and accept the ones that work for you.</p>
+            <h3>Buy in-store</h3>
+            <p>Once matched, you buy the item in-store on the shopper's behalf. BagXtra locks in your payout before you spend a cent.</p>
           </div>
           <div class="step">
             <div class="step__bar" aria-hidden="true"></div>
             <span class="step__num">Step 03</span>
-            <h3>Hand off &amp; get paid</h3>
-            <p>Drop the item with the shopper or a verified vendor hub. Payout lands instantly.</p>
+            <h3>Hand off and get paid</h3>
+            <p>Drop the item with the shopper or at a verified vendor hub. Payout releases to you instantly on confirmed handoff.</p>
           </div>
+        </div>
+        <div style="margin-top:2.4rem;">
+          <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=traveler" target="_blank" rel="noopener" data-app-link="true">List your trip <span class="btn-arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -1059,53 +1138,50 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
       <div class="section-head">
         <span class="eyebrow">Protected, every step</span>
         <h2>Where the money actually sits.</h2>
-        <p>Every transaction runs through escrow. Nobody gets paid — and nobody loses money — until the handoff is confirmed.</p>
+        <p>Every transaction runs through escrow. Nobody gets paid and nobody loses money until the handoff is confirmed.</p>
       </div>
 
-      <div class="escrow-cols">
-        <div class="escrow-col">
-          <span class="stamp"><i class="fa-solid fa-check"></i> Escrowed</span>
-          <h3><i class="fa-solid fa-vault" aria-hidden="true"></i> If you're shopping</h3>
-          <div class="flight-path" aria-hidden="true">
-            <span class="dot"></span><span class="line"><i class="fa-solid fa-plane plane"></i></span><span class="dot"></span>
+      <!-- Shopper column only in shop mode -->
+      <div class="persona-panel" data-persona="shop">
+        <div class="escrow-cols" style="grid-template-columns:1fr;max-width:640px;">
+          <div class="escrow-col">
+            <span class="stamp"><i class="fa-solid fa-check"></i> Escrowed</span>
+            <h3><i class="fa-solid fa-vault" aria-hidden="true"></i> How your money is protected</h3>
+            <div class="flight-path" aria-hidden="true">
+              <span class="dot"></span><span class="line"><i class="fa-solid fa-plane plane"></i></span><span class="dot"></span>
+            </div>
+            <ul class="escrow-list">
+              <li><b>01</b><span>You pay in. The full amount is held, not released, the moment you confirm a match.</span></li>
+              <li><b>02</b><span>Your verified traveler buys the item in-store on your behalf and flies your route.</span></li>
+              <li><b>03</b><span>You confirm delivery. Only then does escrow release the funds.</span></li>
+              <li><b>04</b><span>Anything goes wrong before that? You're refunded in full.</span></li>
+            </ul>
+            <p style="margin-top:1.2rem;font-size:.78rem;color:var(--text-muted);background:var(--surface-2);border-left:3px solid var(--line-strong);padding:.8rem 1rem;border-radius:0 8px 8px 0;">BagXtra does not hold your money. It is held by Stripe, a licensed payment provider, until delivery is confirmed.</p>
           </div>
-          <ul class="escrow-list">
-            <li><b>01</b><span>You pay in. The full amount is held, not released, the moment you confirm a match.</span></li>
-            <li><b>02</b><span>Your traveler picks up the item and flies your route.</span></li>
-            <li><b>03</b><span>You confirm delivery — only then does escrow release the funds.</span></li>
-            <li><b>04</b><span>Anything goes wrong before that? You're refunded in full.</span></li>
-          </ul>
         </div>
-        <div class="escrow-col">
-          <span class="stamp"><i class="fa-solid fa-check"></i> Escrowed</span>
-          <h3><i class="fa-solid fa-shield-heart" aria-hidden="true"></i> If you're traveling</h3>
-          <div class="flight-path" aria-hidden="true">
-            <span class="dot"></span><span class="line"><i class="fa-solid fa-plane plane"></i></span><span class="dot"></span>
+      </div>
+
+      <!-- Traveler column only in travel mode -->
+      <div class="persona-panel" data-persona="travel">
+        <div class="escrow-cols" style="grid-template-columns:1fr;max-width:640px;">
+          <div class="escrow-col">
+            <span class="stamp"><i class="fa-solid fa-check"></i> Escrowed</span>
+            <h3><i class="fa-solid fa-shield-heart" aria-hidden="true"></i> How your payout is protected</h3>
+            <div class="flight-path" aria-hidden="true">
+              <span class="dot"></span><span class="line"><i class="fa-solid fa-plane plane"></i></span><span class="dot"></span>
+            </div>
+            <ul class="escrow-list">
+              <li><b>01</b><span>You accept a request. BagXtra locks your payout in escrow immediately, before you buy anything.</span></li>
+              <li><b>02</b><span>You buy the item in-store and carry it in your bag, same as anything else you pack.</span></li>
+              <li><b>03</b><span>You confirm handoff with a photo and a unique code.</span></li>
+              <li><b>04</b><span>Payout releases to you instantly. No chasing, no waiting on invoices.</span></li>
+            </ul>
+            <p style="margin-top:1.2rem;font-size:.78rem;color:var(--text-muted);background:var(--surface-2);border-left:3px solid var(--line-strong);padding:.8rem 1rem;border-radius:0 8px 8px 0;">BagXtra does not hold your payout. It is held by Stripe, a licensed payment provider, until delivery is confirmed.</p>
           </div>
-          <ul class="escrow-list">
-            <li><b>01</b><span>You accept a request. The payout amount locks in escrow immediately.</span></li>
-            <li><b>02</b><span>You carry the item — same as anything else in your bag.</span></li>
-            <li><b>03</b><span>You confirm handoff with a photo and a unique code.</span></li>
-            <li><b>04</b><span>Payout releases to you instantly. No chasing, no waiting on invoices.</span></li>
-          </ul>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ============================ REST BEAT ============================ -->
-  <div class="rest-beat">
-    <div class="rest-beat__inner">
-      <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="View from an airplane window above the clouds" loading="lazy">
-      <div class="container">
-        <div class="rest-beat__text">
-          <span class="eyebrow">Right now</span>
-          <h2>Someone's flight already matches your delivery.</h2>
-          <p>Thousands of routes fly every day. BagXtra just makes sure your item is on the right one.</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ============================ VENDOR NETWORK ============================ -->
   <section class="section reveal" id="vendors">
@@ -1114,11 +1190,11 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
         <div>
           <span class="eyebrow">[04] Vendor network</span>
           <h2>Every handoff happens somewhere safe.</h2>
-          <p style="color:var(--text-muted); margin-top:1rem;">Local vendor partners near major airports give travelers and shoppers a secure, neutral place to exchange items — no awkward meetups, no guesswork.</p>
+          <p style="color:var(--text-muted); margin-top:1rem;">Local vendor partners near major airports give travelers and shoppers a secure, neutral place to exchange items. No awkward meetups, no guesswork.</p>
           <ul class="vendor-points">
             <li><span class="vicon"><i class="fa-solid fa-bag-shopping"></i></span><div><strong>Shoppers</strong><span>Pick up your item at a verified vendor hub near you. No direct meetups, no risk.</span></div></li>
             <li><span class="vicon"><i class="fa-solid fa-suitcase-rolling"></i></span><div><strong>Travelers</strong><span>Drop off after landing and walk away. No direct contact with the shopper required.</span></div></li>
-            <li><span class="vicon"><i class="fa-solid fa-store"></i></span><div><strong>Vendors</strong><span>Earn a commission on every exchange you facilitate — consistent extra income from foot traffic you already have.</span></div></li>
+            <li><span class="vicon"><i class="fa-solid fa-store"></i></span><div><strong>Vendors</strong><span>Earn a commission on every exchange you facilitate. Consistent extra income from foot traffic you already have.</span></div></li>
           </ul>
           <div class="hero__actions" style="margin-top:2rem;">
             <a class="btn-bx btn-bx-primary" href="mailto:bagxtra.team@gmail.com?subject=Vendor%20Partnership%20Inquiry">Become a vendor partner <span class="btn-arrow" aria-hidden="true">→</span></a>
@@ -1182,8 +1258,8 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
         <div>
           <span class="eyebrow">The team</span>
           <h2 style="margin-top:.6rem;">Built by people who felt the problem.</h2>
-          <p style="margin-top:1.4rem;">BagXtra was born out of our founders' frustration with expensive, unreliable international shipping — getting everyday items from the U.S. to places where access is limited or overpriced shouldn't be this hard.</p>
-          <p>Ikem, Priyanka, and Richard teamed up to build a community-driven alternative that connects shoppers, travelers, and local vendors directly. We believe access to global goods shouldn't depend on where you live — and we're building BagXtra to make that true.</p>
+          <p style="margin-top:1.4rem;">BagXtra was born out of our founders' frustration with expensive, unreliable international shipping. Getting everyday items from the U.S. to places where access is limited or overpriced shouldn't be this hard.</p>
+          <p>Ikem, Priyanka, and Richard teamed up to build a community-driven alternative that connects shoppers, travelers, and local vendors directly. We believe access to global goods shouldn't depend on where you live, and we're building BagXtra to make that true.</p>
         </div>
         <div class="founder-list">
           <div class="founder">
@@ -1218,8 +1294,8 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
             <div id="shopQ1" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">Your payment stays in escrow until you confirm delivery. Travelers are verified and must provide photo proof and a unique code at handoff. If something goes wrong, you're refunded.</div></div>
           </div>
           <div class="accordion-item">
-            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shopQ2"><span class="num">02</span><span>Do I have to pay upfront for the item I'm delivering?</span></button></h3>
-            <div id="shopQ2" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">You pay the item's price plus the traveler's fee when you confirm a match, but that money sits in escrow — it only reaches the traveler once you've confirmed the item arrived in good condition.</div></div>
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shopQ2"><span class="num">02</span><span>How much does it cost to order something?</span></button></h3>
+            <div id="shopQ2" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">BagXtra sets and confirms your all-in price before you pay anything. The price includes the item's store cost plus a service fee. You'll see the exact total in the app before committing, with no surprises at checkout.</div></div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shopQ3"><span class="num">03</span><span>How do I partner with BagXtra as a vendor?</span></button></h3>
@@ -1227,11 +1303,11 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shopQ4"><span class="num">04</span><span>Is this legal and safe in my country?</span></button></h3>
-            <div id="shopQ4" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">BagXtra only allows store-bought, personal-use items that comply with standard airline luggage rules and customs declarations — the same items travelers already carry for friends and family. Shoppers and travelers are each responsible for confirming an item meets their destination's import rules.</div></div>
+            <div id="shopQ4" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">BagXtra only allows store-bought, personal-use items that comply with standard airline luggage rules and customs declarations, the same items travelers already carry for friends and family. Shoppers and travelers are each responsible for confirming an item meets their destination's import rules.</div></div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shopQ5"><span class="num">05</span><span>What happens if the traveler cancels or my item is delayed?</span></button></h3>
-            <div id="shopQ5" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">Your funds stay safely in escrow. We'll match you with another verified traveler on a similar route — or refund you in full if you'd rather not wait.</div></div>
+            <div id="shopQ5" class="accordion-collapse collapse" data-bs-parent="#faqShop"><div class="accordion-body">Your funds stay safely in escrow. We'll match you with another verified traveler on a similar route, or refund you in full if you'd rather not wait.</div></div>
           </div>
         </div>
       </div>
@@ -1240,19 +1316,19 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
         <div class="faq-list accordion" id="faqTravel">
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#travQ1"><span class="num">01</span><span>Is it legal to carry items for others?</span></button></h3>
-            <div id="travQ1" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">Yes — as long as the items are store-bought, declared honestly at customs, and within standard airline luggage allowances. BagXtra only matches travelers with everyday personal items, never anything restricted.</div></div>
+            <div id="travQ1" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">Yes, as long as the items are store-bought, declared honestly at customs, and within standard airline luggage allowances. BagXtra only matches travelers with everyday personal items, never anything restricted.</div></div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#travQ2"><span class="num">02</span><span>What if the item gets seized at customs?</span></button></h3>
-            <div id="travQ2" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">This is rare when items are declared correctly. If it happens, your payout is still protected — escrowed funds are resolved through our dispute process rather than left in limbo.</div></div>
+            <div id="travQ2" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">This is rare when items are declared correctly. If it happens, your payout is still protected. Escrowed funds are resolved through our dispute process rather than left in limbo.</div></div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#travQ3"><span class="num">03</span><span>How and when do I get paid?</span></button></h3>
-            <div id="travQ3" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">The moment you confirm handoff — to the shopper directly or at a verified vendor hub — with a photo and your unique code, your payout releases from escrow straight to your account.</div></div>
+            <div id="travQ3" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">The moment you confirm handoff, to the shopper directly or at a verified vendor hub. With a photo and your unique code, your payout releases from escrow straight to your account.</div></div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#travQ4"><span class="num">04</span><span>How much luggage space do I need?</span></button></h3>
-            <div id="travQ4" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">Most requests fit in 1–3kg of spare space — about what's left in a carry-on after packing your own things. You set your own limit when you post your trip.</div></div>
+            <div id="travQ4" class="accordion-collapse collapse" data-bs-parent="#faqTravel"><div class="accordion-body">Most requests fit in 1–3kg of spare space, about what's left in a carry-on after packing your own things. You set your own limit when you post your trip.</div></div>
           </div>
         </div>
       </div>
@@ -1263,24 +1339,43 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
   <section class="final-cta" id="cta">
     <img class="bg" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="" aria-hidden="true">
     <div class="container">
-      <span class="eyebrow">[06] Get started</span>
-      <h2>Your trip — or your next package — already has a match.</h2>
-      <p>BagXtra is live. No more waitlist, no more guessing what it'll cost to get something across a border.</p>
-      <div class="final-cta__actions">
-        <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=shopper" target="_blank" rel="noopener">I want to shop <span class="btn-arrow" aria-hidden="true">→</span></a>
-        <a class="btn-bx btn-bx-ghost" href="https://app.usebagxtra.com/?ref=landing&amp;as=traveler" target="_blank" rel="noopener">I want to travel &amp; earn <span class="btn-arrow" aria-hidden="true">→</span></a>
+
+      <div class="persona-panel" data-persona="shop">
+        <span class="eyebrow">Get started</span>
+        <h2>Your next package already has a traveler going its way.</h2>
+        <p>BagXtra is live. A verified traveler buys your item in-store and carries it home. Your price is confirmed before you pay, and your money stays in escrow until it arrives.</p>
+        <div class="final-cta__actions">
+          <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=shopper" target="_blank" rel="noopener" data-app-link="true">Find a traveler <span class="btn-arrow" aria-hidden="true">→</span></a>
+          <a class="btn-bx btn-bx-ghost" href="#how-it-works">See how it works</a>
+        </div>
       </div>
+
+      <div class="persona-panel" data-persona="travel">
+        <span class="eyebrow">Get started</span>
+        <h2>Your next flight could pay for itself.</h2>
+        <p>BagXtra is live. Post your trip, get matched, buy in-store, and your payout is locked before you board. No chasing invoices.</p>
+        <div class="final-cta__actions">
+          <a class="btn-bx btn-bx-primary" href="https://app.usebagxtra.com/?ref=landing&amp;as=traveler" target="_blank" rel="noopener" data-app-link="true">List your trip <span class="btn-arrow" aria-hidden="true">→</span></a>
+          <a class="btn-bx btn-bx-ghost" href="https://app.usebagxtra.com/?ref=landing&amp;as=shopper" target="_blank" rel="noopener" data-app-link="true">I want to shop instead</a>
+        </div>
+      </div>
+
     </div>
   </section>
 
 </main>
+
+<!-- Sticky mobile CTA (P2.2) -->
+<div id="stickyCta" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;padding:.85rem 1.25rem;background:color-mix(in srgb, var(--bg) 92%, transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);">
+  <a class="btn-bx btn-bx-primary" id="stickyCtaBtn" href="https://app.usebagxtra.com/?ref=landing&amp;as=shopper" target="_blank" rel="noopener" data-app-link="true" style="width:100%;justify-content:center;">Find a traveler <span class="btn-arrow" aria-hidden="true">→</span></a>
+</div>
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="https://www.usebagxtra.com/_next/image?url=%2Fbagxtralogo.png&amp;w=3840&amp;q=75" alt="BagXtra">
-        <p>Peer-to-peer international shipping, powered by people already going your way.</p>
+        <p>A verified traveler buys your item in-store and carries it home. BagXtra sets the price up front.</p>
         <div class="footer-social">
           <a href="#" aria-label="BagXtra on Instagram"><i class="fa-brands fa-instagram"></i></a>
           <a href="#" aria-label="BagXtra on X"><i class="fa-brands fa-x-twitter"></i></a>
@@ -1291,8 +1386,8 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
         <h4>Product</h4>
         <ul>
           <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#evidence" data-set-mode="shop">For Shoppers</a></li>
-          <li><a href="#evidence" data-set-mode="travel">For Travelers</a></li>
+          <li><a href="#top" data-set-mode="shop" data-scroll-top="true">For Shoppers</a></li>
+          <li><a href="#top" data-set-mode="travel" data-scroll-top="true">For Travelers</a></li>
           <li><a href="#vendors">For Vendors</a></li>
         </ul>
       </div>
@@ -1314,8 +1409,8 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 BagXtra. All rights reserved.</span>
-      <span>Built for shoppers, travelers, and vendors everywhere.</span>
+      <span>2026 BagXtra. All rights reserved.</span>
+      <span>BagXtra does not hold your money. It is held by Stripe, a licensed payment provider, until delivery is confirmed.</span>
     </div>
   </div>
 </footer>
@@ -1327,19 +1422,79 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
   var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- UTM / deep-link param forwarding (section 6) ---------- */
+  function getUrlParams(){
+    var p = {};
+    var sp = new URLSearchParams(window.location.search);
+    ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid','ref'].forEach(function(k){
+      if(sp.get(k)) p[k] = sp.get(k);
+    });
+    return p;
+  }
+  var inboundParams = getUrlParams();
+
+  function appendParams(base, extra){
+    try {
+      var url = new URL(base, window.location.href);
+      Object.keys(inboundParams).forEach(function(k){ url.searchParams.set(k, inboundParams[k]); });
+      if(extra) Object.keys(extra).forEach(function(k){ url.searchParams.set(k, extra[k]); });
+      return url.toString();
+    } catch(e){ return base; }
+  }
+
+  function updateAppLinks(){
+    document.querySelectorAll('[data-app-link]').forEach(function(el){
+      var base = el.getAttribute('href');
+      if(base && base.indexOf('app.usebagxtra.com') !== -1){
+        el.setAttribute('href', appendParams(base));
+      }
+    });
+  }
+  updateAppLinks();
+
+  /* ---------- mode deep-link on load ---------- */
+  var sp0 = new URLSearchParams(window.location.search);
+  var asParam = sp0.get('as') || sp0.get('mode');
+  var initMode = (asParam === 'traveler' || asParam === 'travel') ? 'travel' : 'shop';
+
+  /* ---------- referral code ---------- */
+  var inboundRef = inboundParams.ref || null;
+  function generateRefCode(){
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var out = '';
+    for(var i=0;i<6;i++) out += chars[Math.floor(Math.random()*chars.length)];
+    return out;
+  }
+  var myRef = inboundRef || generateRefCode();
+  var refLinkEl = document.getElementById('referralLink');
+  if(refLinkEl){ refLinkEl.value = 'https://usebagxtra.com/?as=shopper&ref=' + myRef; }
+
   /* ---------- persona mode toggle ---------- */
-  function setMode(mode){
+  function setMode(mode, scrollTop){
     root.setAttribute('data-mode', mode);
     document.querySelectorAll('[data-mode-btn]').forEach(function(b){
       b.setAttribute('aria-selected', b.getAttribute('data-mode-btn') === mode ? 'true' : 'false');
     });
+    var stickyBtn = document.getElementById('stickyCtaBtn');
+    if(stickyBtn){
+      var href = mode === 'travel'
+        ? 'https://app.usebagxtra.com/?ref=landing&as=traveler'
+        : 'https://app.usebagxtra.com/?ref=landing&as=shopper';
+      stickyBtn.setAttribute('href', appendParams(href));
+      stickyBtn.innerHTML = (mode === 'travel' ? 'List your trip ' : 'Find a traveler ') + '<span class="btn-arrow" aria-hidden="true">\u2192</span>';
+    }
+    if(scrollTop){ window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); }
+    if(typeof gtag !== 'undefined') gtag('event','mode_switch',{mode:mode});
   }
   document.querySelectorAll('[data-mode-btn]').forEach(function(btn){
     btn.addEventListener('click', function(){ setMode(btn.getAttribute('data-mode-btn')); });
   });
   document.querySelectorAll('[data-set-mode]').forEach(function(link){
-    link.addEventListener('click', function(){ setMode(link.getAttribute('data-set-mode')); });
+    link.addEventListener('click', function(){
+      setMode(link.getAttribute('data-set-mode'), link.getAttribute('data-scroll-top') === 'true');
+    });
   });
+  setMode(initMode);
 
   /* ---------- mobile nav ---------- */
   var navToggle = document.getElementById('navToggle');
@@ -1378,28 +1533,22 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
   function tickClock(){
     if(!boardClock) return;
     var d = new Date();
-    var hh = String(d.getHours()).padStart(2,'0');
-    var mm = String(d.getMinutes()).padStart(2,'0');
-    boardClock.textContent = hh + ':' + mm;
+    boardClock.textContent = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
   }
-  tickClock();
-  setInterval(tickClock, 15000);
+  tickClock(); setInterval(tickClock, 15000);
 
   /* ---------- evidence carousel ---------- */
   var evidenceCarousel = document.getElementById('evidenceCarousel');
   var evidenceWrap = document.querySelector('.evidence-carousel-wrap');
   if(evidenceCarousel){
     var autoScrollOn = !reduceMotion;
-    var autoScrollSpeed = 0.85;
     var resumeTimer = null;
     var lastSetScrollLeft = evidenceCarousel.scrollLeft;
-
     function pauseAutoScroll(){
       autoScrollOn = false;
       if(resumeTimer) clearTimeout(resumeTimer);
       resumeTimer = setTimeout(function(){ if(!reduceMotion) autoScrollOn = true; }, 2200);
     }
-
     document.querySelectorAll('.carousel-arrow').forEach(function(btn){
       btn.addEventListener('click', function(){
         var dir = parseInt(btn.getAttribute('data-dir'), 10) || 1;
@@ -1409,118 +1558,191 @@ html[data-mode="travel"] .persona-panel[data-persona="travel"]{ display:block; }
         pauseAutoScroll();
       });
     });
-
     function autoScrollStep(){
       if(autoScrollOn && evidenceCarousel){
         var maxScroll = evidenceCarousel.scrollWidth - evidenceCarousel.clientWidth;
         if(maxScroll > 0){
-          if(evidenceCarousel.scrollLeft >= maxScroll - 1){
-            evidenceCarousel.scrollLeft = 0;
-          } else {
-            evidenceCarousel.scrollLeft += autoScrollSpeed;
-          }
+          evidenceCarousel.scrollLeft = evidenceCarousel.scrollLeft >= maxScroll - 1 ? 0 : evidenceCarousel.scrollLeft + 0.85;
         }
         lastSetScrollLeft = evidenceCarousel.scrollLeft;
       }
       requestAnimationFrame(autoScrollStep);
     }
     if(!reduceMotion){ requestAnimationFrame(autoScrollStep); }
-
-    /* only pause for genuine user-driven scroll (drag/swipe), not incidental
-       touch events from scrolling the page past this section */
     evidenceCarousel.addEventListener('scroll', function(){
-      if(Math.abs(evidenceCarousel.scrollLeft - lastSetScrollLeft) > 2){
-        pauseAutoScroll();
-      }
+      if(Math.abs(evidenceCarousel.scrollLeft - lastSetScrollLeft) > 2) pauseAutoScroll();
     }, { passive:true });
-
     if(evidenceWrap){
       evidenceWrap.addEventListener('mouseenter', function(){ autoScrollOn = false; if(resumeTimer) clearTimeout(resumeTimer); });
       evidenceWrap.addEventListener('mouseleave', pauseAutoScroll);
     }
   }
 
+  /* ---------- pricing model (section 8) ---------- */
+  // Service fee % by tier and value band
+  var TIERS = {
+    1: {lo:0.30, mid:0.25, hi:0.20},
+    2: {lo:0.225, mid:0.20, hi:0.16},
+    3: {lo:0.20, mid:0.18, hi:0.14}
+  };
+  function getFeeRate(tier, val){
+    var t = TIERS[tier] || TIERS[1];
+    return val < 100 ? t.lo : val <= 500 ? t.mid : t.hi;
+  }
+  function calcAllIn(tier, val){
+    var fee = val * getFeeRate(tier, val);
+    return val + fee + (val + fee) * 0.03 + 0.30;
+  }
+  function calcTravelerPayout(tier, val){
+    return val * getFeeRate(tier, val) * 0.70;
+  }
+
   /* ---------- shop calculator ---------- */
-  var shopOrigin = document.getElementById('shopOrigin');
+  var shopDest = document.getElementById('shopDest');
   var shopValue = document.getElementById('shopValue');
-  var shopCourier = document.getElementById('shopCourier');
   var shopBagx = document.getElementById('shopBagx');
   var shopSave = document.getElementById('shopSave');
-  function calcShop(){
-    if(!shopValue) return;
-    var v = Math.max(20, Math.min(3000, parseFloat(shopValue.value) || 0));
-    var mult = parseFloat(shopOrigin.value) || 1;
-    var courier = (v * 0.45 + 60) * mult;
-    var bagx = (v * 0.15 + 25) * mult;
-    var save = Math.round(((courier - bagx) / courier) * 100);
-    shopCourier.textContent = '$' + Math.round(courier);
-    shopBagx.textContent = '$' + Math.round(bagx);
-    shopSave.textContent = 'Save ' + save + '%';
+  var shopSaveLabel = document.getElementById('shopSaveLabel');
+  var localToggle = document.getElementById('localToggle');
+  var localRow = document.getElementById('localRow');
+  var localPrice = document.getElementById('localPrice');
+  var shopCta = document.getElementById('shopCta');
+
+  if(localToggle && localRow){
+    localToggle.addEventListener('click', function(){
+      var open = localRow.style.display !== 'none';
+      localRow.style.display = open ? 'none' : 'block';
+      localToggle.textContent = open ? '+ Compare with my local price' : '- Hide local price comparison';
+    });
   }
-  [shopOrigin, shopValue].forEach(function(el){ if(el) el.addEventListener('input', calcShop); });
+
+  function calcShop(){
+    if(!shopValue || !shopDest) return;
+    var v = Math.max(20, Math.min(3000, parseFloat(shopValue.value) || 0));
+    var tier = parseInt(shopDest.value, 10) || 1;
+    var allIn = calcAllIn(tier, v);
+    if(shopBagx) shopBagx.textContent = '$' + Math.round(allIn);
+    var lp = localPrice ? parseFloat(localPrice.value) : 0;
+    if(lp && lp > allIn){
+      if(shopSave) shopSave.textContent = '~' + Math.round(((lp - allIn) / lp) * 100) + '% off';
+      if(shopSaveLabel) shopSaveLabel.textContent = 'vs. your local price';
+    } else if(lp && lp <= allIn){
+      if(shopSave) shopSave.textContent = 'Better access';
+      if(shopSaveLabel) shopSaveLabel.textContent = 'convenience, not price';
+      // pivot to convenience message per §8
+    } else {
+      var illus = v * 2.0;
+      if(shopSave) shopSave.textContent = '~' + Math.round(((illus - allIn) / illus) * 100) + '% off';
+      if(shopSaveLabel) shopSaveLabel.textContent = 'vs. illustrative local retail';
+    }
+    if(shopCta){
+      var dest = shopDest.options[shopDest.selectedIndex] ? shopDest.options[shopDest.selectedIndex].text : '';
+      shopCta.setAttribute('href', appendParams('https://app.usebagxtra.com/?ref=landing&as=shopper', {item_value: Math.round(v), dest: dest}));
+    }
+    if(typeof gtag !== 'undefined') gtag('event','calculator_interact',{calc_type:'shop',item_value:Math.round(v)});
+  }
+  [shopDest, shopValue, localPrice].forEach(function(el){ if(el) el.addEventListener('input', calcShop); });
   calcShop();
 
   /* ---------- travel calculator ---------- */
-  var travelSpace = document.getElementById('travelSpace');
-  var travelSpaceVal = document.getElementById('travelSpaceVal');
+  var travelDest = document.getElementById('travelDest');
+  var travelItemVal = document.getElementById('travelItemVal');
   var travelPayout = document.getElementById('travelPayout');
   function calcTravel(){
-    if(!travelSpace) return;
-    var kg = parseFloat(travelSpace.value) || 1;
-    travelSpaceVal.textContent = kg + 'kg';
-    var low = Math.round(kg * 15);
-    var high = Math.round(kg * 25);
-    travelPayout.textContent = '$' + low + '–$' + high;
+    if(!travelItemVal || !travelDest) return;
+    var v = Math.max(20, Math.min(3000, parseFloat(travelItemVal.value) || 0));
+    var tier = parseInt(travelDest.value, 10) || 1;
+    if(travelPayout) travelPayout.textContent = '$' + Math.round(calcTravelerPayout(tier, v));
+    if(typeof gtag !== 'undefined') gtag('event','calculator_interact',{calc_type:'travel',item_value:Math.round(v)});
   }
-  if(travelSpace){ travelSpace.addEventListener('input', calcTravel); calcTravel(); }
+  [travelDest, travelItemVal].forEach(function(el){ if(el) el.addEventListener('input', calcTravel); });
+  calcTravel();
 
-  /* ---------- count-up stats ---------- */
-  function animateCount(el){
-    var target = parseFloat(el.getAttribute('data-count'));
-    var suffix = el.getAttribute('data-suffix') || '';
-    if(reduceMotion){ el.textContent = target + suffix; return; }
-    var start = 0, dur = 1100, t0 = null;
-    function step(ts){
-      if(!t0) t0 = ts;
-      var p = Math.min(1, (ts - t0) / dur);
-      var eased = 1 - Math.pow(1 - p, 3);
-      var val = Math.round(start + (target - start) * eased);
-      el.textContent = val + suffix;
-      if(p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
+  /* ---------- notify-me (P2.4) ---------- */
+  var notifyBtn = document.getElementById('notifyBtn');
+  var notifyConfirm = document.getElementById('notifyConfirm');
+  if(notifyBtn){
+    notifyBtn.addEventListener('click', function(){
+      var from = document.getElementById('notifyFrom') ? document.getElementById('notifyFrom').value : '';
+      var to = document.getElementById('notifyTo') ? document.getElementById('notifyTo').value : '';
+      if(!from || !to) return;
+      // Wire to waitlist/lead capture in production
+      if(notifyConfirm) notifyConfirm.style.display = 'block';
+      notifyBtn.disabled = true;
+      notifyBtn.textContent = 'Saved';
+      if(typeof gtag !== 'undefined') gtag('event','notify_submit',{from:from,to:to});
+    });
   }
 
-  /* ---------- scroll reveal (+ stat trigger) ---------- */
+  /* ---------- referral copy (P2.3) ---------- */
+  var referralCopy = document.getElementById('referralCopy');
+  var referralCopied = document.getElementById('referralCopied');
+  if(referralCopy && refLinkEl){
+    referralCopy.addEventListener('click', function(){
+      navigator.clipboard.writeText(refLinkEl.value).then(function(){
+        if(referralCopied){ referralCopied.style.display = 'inline'; setTimeout(function(){ referralCopied.style.display = 'none'; }, 2200); }
+      });
+      if(typeof gtag !== 'undefined') gtag('event','referral_link_copy',{ref:myRef});
+    });
+  }
+
+  /* ---------- scroll reveal ---------- */
   if('IntersectionObserver' in window && !reduceMotion){
     var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){
-          e.target.classList.add('is-visible');
-          io.unobserve(e.target);
-        }
-      });
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-
-    var statIo = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ animateCount(e.target); statIo.unobserve(e.target); }
-      });
-    }, { threshold: 0.4 });
-    document.querySelectorAll('.stat-num').forEach(function(el){ statIo.observe(el); });
   } else {
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
-    document.querySelectorAll('.stat-num').forEach(function(el){ animateCount(el); });
   }
 
-  /* ---------- scroll-margin for sticky nav anchors ---------- */
-  var navHeight = document.querySelector('.site-nav');
-  if(navHeight){
-    var h = navHeight.offsetHeight + 16;
-    document.querySelectorAll('main section[id], #faq, #vendors, #story, #trust, #cta').forEach(function(s){
-      s.style.scrollMarginTop = h + 'px';
+  /* ---------- sticky mobile CTA (P2.2) ---------- */
+  var stickyCta = document.getElementById('stickyCta');
+  var heroEl = document.getElementById('top');
+  var finalCtaEl = document.getElementById('cta');
+  var footerEl = document.querySelector('.site-footer');
+  if(stickyCta && heroEl && 'IntersectionObserver' in window){
+    var heroVisible = false;
+    var finalCtaVisible = false;
+    var footerVisible = false;
+    function updateStickyVisibility(){
+      var shouldHide = heroVisible || finalCtaVisible || footerVisible;
+      stickyCta.style.display = shouldHide ? 'none' : 'block';
+    }
+    var heroObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ heroVisible = e.isIntersecting; });
+      updateStickyVisibility();
+    }, { threshold: 0.1 });
+    heroObs.observe(heroEl);
+
+    if(finalCtaEl){
+      var finalCtaObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ finalCtaVisible = e.isIntersecting; });
+        updateStickyVisibility();
+      }, { threshold: 0.15 });
+      finalCtaObs.observe(finalCtaEl);
+    }
+    if(footerEl){
+      var footerObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ footerVisible = e.isIntersecting; });
+        updateStickyVisibility();
+      }, { threshold: 0.05 });
+      footerObs.observe(footerEl);
+    }
+  }
+
+  /* ---------- CTA click GA4 events ---------- */
+  document.querySelectorAll('.btn-bx[href]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(typeof gtag !== 'undefined') gtag('event','cta_click',{label:btn.textContent.trim().replace(/[\u2192]/g,'').trim()});
     });
+  });
+
+  /* ---------- scroll-margin for sticky nav ---------- */
+  var navEl = document.querySelector('.site-nav');
+  if(navEl){
+    var h = navEl.offsetHeight + 16;
+    document.querySelectorAll('main section[id]').forEach(function(s){ s.style.scrollMarginTop = h + 'px'; });
   }
 })();
 </script>
